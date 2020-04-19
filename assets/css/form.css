@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+/*form style*/
+/*form style*/
+.pure-form {
+    width: 100%;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 0;
+    border: 1px solid #f1f1f1;
+}
+
+.form-group {
+    border-radius: 0 !important;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.form-group span.red {
+    color: #CC0000;
+}
+
+.form-group input[type=text], input[type=email], input[type=password], input[type=number], textarea {
+    width: 100%;
+    border: 1px solid #cacaca;
+    border-radius: 0 !important;
+    padding: 10px;
+    line-height: 1;
+    font-size: 13px;
+}
+
+.form-group input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=number]:focus, textarea:focus {
+    border-color: #c0c0c0 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.form-group select {
+    width: 100%;
+    border: 1px solid #cacaca;
+    border-radius: 0 !important;
+    line-height: 1;
+    padding: 10px;
+    background: #ffffff;
+    font-size: 13px;
+}
+
+.form-group select:focus {
+    border-color: #c0c0c0 !important;
+    border-radius: 0 !important;
+    background: #ffffff;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+    background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #4CAF50;
+}

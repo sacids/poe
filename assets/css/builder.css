@@ -1,0 +1,57 @@
+/* Sticky footer styles
+   -------------------------------------------------- */
+.footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    height: 40px;
+    line-height: 40px; /* Vertically center the text there */
+    background-color: #ffffff;
+}
+
+#wrapper, #props{
+    height: 450px;
+    overflow-y: scroll;
+}
+
+.page{
+    background-color: #7bb98b;
+    width: 100%;
+}
+
+.items {
+    min-height: 100px;
+}
+
+.items .element {
+    background-color: lightblue;
+    margin:10px 0 10px 0;
+    padding:10px;
+}
+
+.actions{
+    cursor: pointer;
+}
+
+.eprop{
+    cursor: move;
+}
+
+#wrapper .eprop{
+    line-height: 1;
+}
+
+#select_option_wrapper{
+    background-color: #f4f4f4;
+    padding:10px;
+    font-size:10px;
+    line-height: 0.9;
+}
+
+#select_option_wrapper label{
+    margin:1px;
+}
+
+.select_option_items{
+    margin-top:3px;
+}

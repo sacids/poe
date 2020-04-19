@@ -1,0 +1,175 @@
+/*!
+ * Start Bootstrap - Creative Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: #424242;
+    font-size: 14px;
+}
+
+a {
+    color: #2f4050;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit
+}
+
+p {
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+/*===============================================
+Background colors
+===============================================*/
+.bg-primary {
+    background-color: #088c4a !important;
+    color: #ffffff;
+}
+
+.bg-secondary {
+    background-color: #2f4050 !important;
+    color: #ffffff;
+}
+
+.bg-black {
+    color: #fff;
+    background-color: #000000;
+}
+
+.bg-dark {
+    color: #fff;
+    background-color: #222;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-grey {
+    background-color: #eeeeee;
+}
+
+.bg-light-grey {
+    background-color: #fafafa;
+}
+
+/*===============================================
+Buttons
+===============================================*/
+.btn {
+    border-radius: 0 !important;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #088c4a;
+    border-color: #088c4a;
+}
+
+.btn-outline-primary {
+    color: #088c4a;
+    background-color: transparent;
+    background-image: none;
+    border-color: #088c4a;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #088c4a;
+    border-color: #088c4a;
+}
+
+.btn-secondary {
+    color: #ffffff;
+    background-color: #2f4050;
+    border-color: #2f4050;
+}
+
+.btn-outline-secondary {
+    color: #2f4050;
+    background-color: transparent;
+    background-image: none;
+    border-color: #2f4050;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #2f4050;
+    border-color: #2f4050;
+}
+
+.btn-tertiary {
+    color: #3F3F3F;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-color: #f1f1f1;
+}
+
+/*===============================================
+Tables
+===============================================*/
+table.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px 0 1em 1px;
+    width: 100%;
+}
+
+table.table th {
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    padding: 8px !important;
+    background: #F1F1F1;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+table.table td {
+    font-size: 13px;
+    vertical-align: top;
+    background: #FFF;
+    border-bottom: 1px solid #E3E3E3;
+    padding: 10px !important;
+    color: #333;
+}
+
+table.table td a {
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+table.table th a {
+    text-align: right;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+/*.table tr:nth-child(odd) td {*/
+/*background-color: #FAFAFA;*/
+/*}*/
+
+/*.table tr:nth-child(even) td {*/
+/*background-color: #FFF;*/
+/*}*/
