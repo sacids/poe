@@ -289,7 +289,7 @@ class Entries extends MX_Controller
                 $this->data['entries'] = [];
         } else {
             //table data
-            $entries = $this->entry_model->get_many_by(['arrival_date' => date('Y-m-d')]);
+            $entries = $this->entry_model->get_all();
             $this->data['entries'] = $entries;
         }
 

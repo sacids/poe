@@ -211,7 +211,7 @@
                                 <div class="tab" id="tab3">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title">Contact while in Tanzania;</h6>
+                                            <h6 class="title">Contact while in Tanzania</h6>
                                         </div><!--./col-lg-6 -->
                                     </div><!--./row -->
 
@@ -261,7 +261,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <label>Country where the journey started: </label>
+                                                <label>Country where the journey started </label>
                                                 <?php echo form_input($country_origin); ?>
                                                 <span id="errorCountryOrigin" style="color: red;"></span>
                                             </div><!--./form-group -->
@@ -334,7 +334,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 <label>Visited/Resided in an area with cases/deaths due to
-                                                    Ebola / Corona Virus?</label><br/>
+                                                    Ebola?</label><br/>
                                                 <?php
                                                 echo form_radio('visited_area', 'Yes', NULL, 'id="visited_area" ' . set_radio('visited_area', 'Yes'));
                                                 echo '<label>Yes</label> &nbsp;&nbsp;&nbsp;';
@@ -410,7 +410,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <label>Others (specify)</label>
+                                                <label>Others symptoms (specify)</label>
                                                 <?php echo form_input(['id' => 'other_symptoms', 'name' => 'other_symptoms', 'class' => 'form-control', 'type' => 'text']); ?>
                                                 <span style="color: red;"><?= form_error('other_symptoms'); ?></span>
                                             </div><!--./form-group -->
