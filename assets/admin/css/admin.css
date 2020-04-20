@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    background-color: #f6f6f6;
+  }
+  .logo{
+    margin-bottom: 10px;
+  }
+  .sidebar {
+    margin: 0;
+    padding: 10px 0px 10px 0px;
+    width: 88px;
+    background-color: rgb(30, 61, 42);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    z-index: 100000;
+    font-size: 0.75rem;
+    letter-spacing: .025em;
+    line-height: 1.3;
+    color: antiquewhite;
+  }
+
+  .subMenu{
+    width: 250px;
+    height: calc(100vh - 110px);
+    background-color: #28362f;
+    position: fixed;
+    margin-left: -250px;
+    z-index: 0;
+    padding:20px;
+  }
+
+  .sidebar .item {
+    display: block;
+    color: #cacaca;
+    padding: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .sidebar .item:hover{
+    background-color: #374c42;
+  }
+  .item a, .item a:link, .item a:visited, .item a:hover, .item a:active {
+    color: #cacaca;
+    text-decoration: none;
+  }
+  .subMenu .link{
+    cursor: pointer;
+  }
+
+  .subMenu .link:hover{
+    color: white;
+  }
+   
+  .sidebar .item .active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+
+  div.content {
+    margin-left: 88px;
+    padding: 1px 16px;
+    min-height: calc(100vh - 265px);
+  }
+
+  footer{
+    margin-left: 88px;
+  }
+  
+  .header{
+    margin-left: 88px;
+    height: 65px;
+    padding: 1px 16px;
+  }
+
+
+
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar .item {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar .item {
+      text-align: center;
+      float: none;
+    }
+  }
