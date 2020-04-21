@@ -41,12 +41,16 @@ class Screening extends MX_Controller{
         echo 'please select a module';
     }
 
-    public function domestic(){
+    public function international(){
+        $this->domestic('international');
+    }
+
+    public function domestic($type = 'Local'){
 
         if($this->manage_tbl('entries')) return;
 
         $this->db_exp->set_table('entries');
-        $this->db_exp->set_search_condition('form_type = "Local"');
+        $this->db_exp->set_search_condition('form_type = "'.$type.'"');
         $this->db_exp->set_hidden(
             array(
                 'form_type','age','sex','ID_type','transport_means','seat_no',
