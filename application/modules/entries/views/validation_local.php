@@ -180,9 +180,9 @@
             }
 
             //check all data in tab one
-//            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
-//                return false;
-//            }
+            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
+                return false;
+            }
 
             return true;
 
@@ -242,9 +242,9 @@
             }
 
             //check all data in tab one
-//            if ((errorRegion || errorMobile) === true) {
-//                return false;
-//            }
+            if ((errorRegion || errorMobile) === true) {
+                return false;
+            }
             return true;
 
             //tab 3 validation

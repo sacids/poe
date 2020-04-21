@@ -172,9 +172,9 @@
             }
 
             //check all data in tab one
-//            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
-//                return false;
-//            }
+            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
+                return false;
+            }
 
             return true;
 
@@ -208,9 +208,9 @@
             }
 
             //check all data in tab one
-//            if ((errorEmployment || errorStayDuration) === true) {
-//                return false;
-//            }
+            if ((errorEmployment || errorStayDuration) === true) {
+                return false;
+            }
             return true;
 
             //tab 3 validation
@@ -242,9 +242,9 @@
             }
 
             //check all data in tab one
-//            if ((errorRegion || errorMobile || errorEmail) === true) {
-//                return false;
-//            }
+            if ((errorRegion || errorMobile || errorEmail) === true) {
+                return false;
+            }
 
             return true;
 
