@@ -1047,7 +1047,7 @@ class Db_exp
         }
 
         
-        $this->output   = '<div class="table-responsive"><table class="table table-bordered1 table-striped dbx_table compact stripe" action="'.$this->form_action.'">';
+        $this->output   = '<div class="table-responsive"><table class="table table-bordered1 table-striped dbx_table compact stripe" action="'.$this->form_action.'" t="'.base64_encode($this->table).'">';
 
         // set the header
         
@@ -1071,7 +1071,7 @@ class Db_exp
         // set the body
         foreach ($query->result_array() as $row) {
 
-            $this->output   .=  '<tr><td>'.$row['id'].'</td>';
+            $this->output   .=  '<tr row_id="'.$row['id'].'"><td>'.$row['id'].'</td>';
          
             $this->output   .= '<td><li class="dropdown">
             <span href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label material-icons">dehaze</span> <span class="caret"></span></span>
@@ -1095,7 +1095,7 @@ class Db_exp
             foreach ($row as $key => $val) {
 
                 if ($key === 'id') continue;
-                $this->output   .= '<td>'.$this->display_field($key, $val).'</td>';
+                $this->output   .= '<td id="'.$key.'_'.$row['id'].'" fld="'.$key.'" class="eip">'.$this->display_field($key, $val).'</td>';
 
             }
             $this->output   .= '</tr>';

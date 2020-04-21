@@ -11,15 +11,13 @@ function initComponents(){
 
 function make_table(){
 
-    columnDefs: [
-        
-    ],
     $('.dbx_table').DataTable({
-        autoWidth: false,
+        autoWidth:      false,
         deferRender:    true,
         scrollY:        400,
+        scrollX:        true,
         scrollCollapse: true,
-        scroller:       true,
+        paging:         false,
         select:         true,
         responsive: true,
         columnDefs: [
@@ -50,6 +48,46 @@ function make_table(){
 }
 
 $(document).ready(function() {
+
+    $(document).on('click','.dbx_table td', function(event){
+        var fld_name    = $(this).attr('fld');
+        var tbl         = $(this).closest('.dbx_table').attr('t');
+        var row_id      = $(this).closest('tr').attr('row_id');
+        var fld_val1    = $(this).html();
+        var id          = $(this).attr('id');
+
+        var fld_val2     = prompt("Edit "+fld_name+" : ", fld_val1);
+        var url         = window.location.origin+'/admin/edit_field?i='+row_id+'&f='+fld_name+'&v='+fld_val2+'&t='+tbl;
+        $(this).html('<div class="d-flex justify-content-center">'+
+                '<div class="spinner-border" role="status">'+
+                    '<span class="sr-only">Loading...</span>'+
+                '</div>'+
+            '</div>');
+
+        var jqXHR = $.ajax({
+            type:"GET",
+            url:url,
+            contentType: false,
+            cache: false,
+            processData: false
+        }).done(function(data){
+            if(data){
+                $('#'+id).html(fld_val2);
+            }else{
+                alert('failed to update');
+                $('#'+id).html(fld_val1);
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            alert('Temporary error, please try again');
+            if ( console && console.log ) {
+                console.log("Loading Ajax dbx: " + textStatus + ", " + errorThrown);
+            }
+        }).always(function(){ 
+
+        });
+
+    });
+
 
     $(document).on('click', '.dbx_submit', function(event) {
 
@@ -229,7 +267,7 @@ $(document).ready(function() {
    
 
     $('.dbx_table').DataTable({
-        autoWidth: false,
+        autoWidth: true,
         deferRender:    true,
         scrollY:        400,
         scrollCollapse: true,
