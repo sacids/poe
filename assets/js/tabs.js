@@ -56,7 +56,7 @@ function validateForm() {
     let sex = document.getElementById("sex").value;
     let nationality = document.getElementById("nationality").value;
     let passportNo = document.getElementById("passport_number").value;
-    let flight = document.getElementById("flight").value;
+    let vessel = document.getElementById("vessel").value;
     let arrivalDate = document.getElementById("arrival_date").value;
     let pointOfEntry = document.getElementById("point_of_entry").value;
     let stayDuration = document.getElementById("duration_stay").value;
@@ -66,7 +66,7 @@ function validateForm() {
     //validate per current tab
     //tab 1 validation
     if (currentTab === 0) {
-        let errorName = errorAge = errorSex = errorNationality = errorPassportNo = errorFlight = errorArrivalDate = errorPointOfEntry = true;
+        let errorName = errorAge = errorSex = errorNationality = errorPassportNo = errorVessel = errorArrivalDate = errorPointOfEntry = true;
 
         // Validate name
         if (name === "") {
@@ -113,12 +113,12 @@ function validateForm() {
             errorPassportNo = false;
         }
 
-        //validate flight
-        if (flight === "") {
-            printError("errorFlight", "Please enter Vessel/Flight/Vehicle Name/No")
+        //validate vessel
+        if (vessel === "") {
+            printError("errorVessel", "Please enter Vessel Name/No")
         } else {
-            printError("errorFlight", "");
-            errorFlight = false;
+            printError("errorVessel", "");
+            errorVessel = false;
         }
 
         //validate arrivalDate
@@ -155,7 +155,7 @@ function validateForm() {
         }
 
         //check all data in tab one
-        if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorFlight || errorArrivalDate || errorPointOfEntry) === true) {
+        if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
             return false;
         }
 
