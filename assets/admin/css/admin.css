@@ -174,7 +174,3 @@ body {
   .table.dataTable tbody td:last-child{
     border-right: 1px solid #dddddd;
   }
-
-  .table.dataTable11{
-    width: auto; !important
-  }
