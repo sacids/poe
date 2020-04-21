@@ -13,6 +13,7 @@ class Admin extends MX_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model('model');
+        $this->load->library('db_exp');
 
     }
 
@@ -33,6 +34,7 @@ class Admin extends MX_Controller{
 
         $data['modules']    = $holder;
         
+        
         //echo '<pre>'; print_r($data); echo '</pre>';exit();
         $this->load->view('common/head');
         $this->load->view('common/sidebar',$data);
@@ -42,9 +44,12 @@ class Admin extends MX_Controller{
         $this->load->view('common/foot');
     }
 
-    public function test(){
+    public function modules(){
 
-        echo 'this is a test';
+        $this->db_exp->set_table('modules');
+        $this->db_exp->render('row_list');
+        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div>';
+
     }
 
 
