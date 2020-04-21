@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = APP_URL;
-//$config['base_url'] = 'http://192.168.43.70/sacids/covid19';
+//$config['base_url'] = 'http://127.0.0.1/sacids/poe';
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +101,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

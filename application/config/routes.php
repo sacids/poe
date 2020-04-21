@@ -52,7 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'entries';
 
 //entries
-$route['entries'] = 'entries/index';
+$route['entries/local'] = 'entries/local';
+$route['entries/international'] = 'entries/international';
 $route['entries/lists'] = 'entries/lists';
 $route['entries/record_temp'] = 'entries/record_temp';
 $route['entries/details/(:num)'] = 'entries/details/$1';

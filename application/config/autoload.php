@@ -138,6 +138,8 @@ $autoload['model'] = array(
     'user_model',
     'group_model',
     'users_group_model',
+    'region_model',
+    'district_model',
     'symptom_model',
     'entries/poe_model',
     'entries/visited_area_model',

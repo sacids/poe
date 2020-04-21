@@ -67,18 +67,12 @@
                                             <input type="number" name="temp" id="temp"
                                                    value="<?= (!empty($values->temperature) ? $values->temperature : '') ?>"
                                                    class="form-control"/>
-                                            <select id="action_taken" name="action_taken">
-                                                <option>Action</option>
-                                                <option>Allowed to proceed</option>
-                                                <option>Sent to secondary screening</option>
-                                            </select>
-
                                             <span class="input-group-btn">
                                                     <button type="submit" name="search" class="btn btn-primary btn-sm">
                                                     <i class="icon-arrow-right5"></i></button>
                                                 </span>
                                         </div><!--./form-group -->
-                                        <span id="errorname" style="color: red;"></span>
+                                        <span id="errorTemp" style="color: red;"></span>
                                     </form>
                                 </td>
                             </tr>
@@ -155,7 +149,7 @@
         <script type="text/javascript">
             //on form submit
             let form = document.getElementById('formElem');
-            errorMessage = document.getElementById('errorname');
+            errorMessage = document.getElementById('errorTemp');
             form.onsubmit = function () {
                 let formData = new FormData(form);
 
@@ -175,6 +169,9 @@
                     errorMessage.innerText = 'Temperature range 35 to 40';
                     return false
                 }
+
+                alert("temp => " + temp + " entry => " + entry_id);
+                exit();
 
                 //append formData
                 formData.append('entry_id', entry_id);

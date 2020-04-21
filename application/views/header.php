@@ -28,6 +28,7 @@
     <script src="<?= base_url('assets/js/popper.min.js') ?>"></script>
 
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/custom.js') ?>"></script>
     <!-- /core JS files -->
 </head>
 

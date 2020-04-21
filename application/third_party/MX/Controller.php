@@ -44,6 +44,8 @@ require dirname(__FILE__) . '/Base.php';
  * @property CI_Input $input
  * @property CI_Upload $upload
  * @property Model $model
+ * @property Region_model $region_model
+ * @property District_model $district_model
  * @property User_model $user_model
  * @property Group_model $group_model
  * @property Users_group_model $users_group_model
