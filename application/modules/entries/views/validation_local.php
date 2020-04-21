@@ -180,7 +180,7 @@
             }
 
             //check all data in tab one
-            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
+            if ((errorName || errorAge || errorSex || errorNationality || errorIdNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
                 return false;
             }
 

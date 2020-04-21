@@ -30,7 +30,7 @@ function suggest_districts() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = xhr.responseText;
             e = document.getElementById('district_id');
-            alert(response);
+            //alert(response);
             if (response !== "") {
                 e.innerHTML = response;
                 e.style.display = "block";
