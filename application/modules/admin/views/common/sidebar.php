@@ -6,14 +6,15 @@
 
     <?php
         $sm     = '';
+        
         foreach($modules as $key => $module){
             if(!is_array($module['link'])){
                 $link = base_url($module['link']);
             }else{
                 $link = '#';
                 $sm .= '<div class="subMenu" id="m_'.$key.'">';
-                $sm .= "<div>".$module['props']->title." <i class='material-icons closeSM'>close</i></div>";
-                foreach($module['link'] as $key => $val){
+                $sm .= "<div><strong class='subMenu-title'>".$module['props']->title."</strong> <i class='material-icons closeSM'>close</i></div>";
+                foreach($module['link'] as $k => $val){
                     $sm .= "<div class='link' u='$val->link'> $val->title </div>";
                 }
                 $sm .= "</div>";

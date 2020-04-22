@@ -38,10 +38,15 @@ $(document).ready(function(){
 
         e.preventDefault();
         // dim & progress
+        $('#content').html('<div class="d-flex justify-content-center">'+
+                '<div class="spinner-border" role="status">'+
+                    '<span class="sr-only">Loading...</span>'+
+                '</div>'+
+            '</div>');
     
         var jqXHR = $.ajax({
             type:"POST",
-            url:window.location.origin+'/poe/'+url,
+            url:window.location.origin+'/'+url,
         }).done(function (data){
 
             $('#content').html(data);
@@ -61,6 +66,45 @@ $(document).ready(function(){
         return false;
     });
 
+
+    $(document).on('click','.item_manage .tab-item', function(e){
+
+        $('.item_manage .tab-item').removeClass('active');
+        $(this).addClass('active');
+
+        var method  = $(this).attr('act');
+        var data    = $(this).attr('args');
+        alert(method + ' ' + data);
+
+        $('#item_content').html('<div class="d-flex justify-content-center">'+
+                '<div class="spinner-border" role="status">'+
+                    '<span class="sr-only">Loading...</span>'+
+                '</div>'+
+            '</div>');
+    
+        var jqXHR = $.ajax({
+            type:"POST",
+            url:window.location.origin+'/'+method,
+            data:data,
+        }).done(function (data){
+
+            $('#item_content').html(data);
+
+        }).fail(function(jqXHR, textStatus, errorThrown){
+
+            $('#item_content').html('Temporary error, please try again');
+
+            if ( console && console.log ) {
+                console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
+            }
+        }).always(function() {
+        });
+
+        // Avoid submit event to continue normal execution
+        e.preventDefault();
+        return false;
+
+    });
     
 
 });

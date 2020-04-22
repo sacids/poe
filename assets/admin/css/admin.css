@@ -1,7 +1,8 @@
 body {
     margin: 0;
     font-family: "Lato", sans-serif;
-    background-color: #f6f6f6;
+    background-color: #fbfbfb;
+    font-size: 0.85em;
   }
   .logo{
     margin-bottom: 10px;
@@ -27,8 +28,31 @@ body {
     background-color: #28362f;
     position: fixed;
     margin-left: -250px;
-    z-index: 0;
-    padding:20px;
+    z-index: 90000;
+
+    font-size: 0.85rem;
+    letter-spacing: .025em;
+    color: #fff;
+  }
+
+  .subMenu-title{
+    color: #fff;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 20px 0px 10px 15px;
+  }
+
+  .subMenu .link{
+    cursor: pointer;
+    padding: 5px 15px;
+  }
+
+  .closeSM{
+    padding: 30px 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   .sidebar .item {
@@ -46,17 +70,13 @@ body {
     color: #cacaca;
     text-decoration: none;
   }
-  .subMenu .link{
-    cursor: pointer;
-  }
-
   .subMenu .link:hover{
-    color: white;
+    background-color: #374c42;
   }
    
   .sidebar .item .active {
     background-color: #4CAF50;
-    color: white;
+    color:#fbfbfb;
   }
   
 
@@ -93,4 +113,64 @@ body {
       text-align: center;
       float: none;
     }
+  }
+
+
+
+
+
+  .item_manage .tab-item{
+    margin-left: 18px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .item_manage .tab-item-f{
+    border-right: 1px solid #ccc;
+  }
+
+  .item_manage .tab-item:hover{
+    background-color: #c4c2c2;
+  }
+
+  .item_manage_tabs .active{
+    background-color: #fbfbfb;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #fbfbfb;
+  }
+  .item_manage_tabs .title{
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .item_manage .item_manage_tabs{
+
+    background-color: #e5e2e2;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+  }
+
+
+  table.dataTable thead {
+    background-color: #283d33;
+    letter-spacing: .025em;
+    color: #fff;
+  }
+  .dataTables_wrapper .dataTables_filter input{
+    border: 1px solid #ccc;
+  }
+
+  .table.dataTable tbody td{
+    border-right: 1px dashed #dddddd;
+    border-top: 0px dashed #dddddd;
+  }
+
+  .table.dataTable tbody td:first-child{
+    border-left: 1px solid #dddddd;
+  }
+
+  .table.dataTable tbody td:last-child{
+    border-right: 1px solid #dddddd;
   }

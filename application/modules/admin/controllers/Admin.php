@@ -13,6 +13,7 @@ class Admin extends MX_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model('model');
+        $this->load->library('db_exp');
 
     }
 
@@ -33,6 +34,7 @@ class Admin extends MX_Controller{
 
         $data['modules']    = $holder;
         
+        
         //echo '<pre>'; print_r($data); echo '</pre>';exit();
         $this->load->view('common/head');
         $this->load->view('common/sidebar',$data);
@@ -42,9 +44,30 @@ class Admin extends MX_Controller{
         $this->load->view('common/foot');
     }
 
-    public function test(){
+    public function edit_field(){
 
-        echo 'this is a test';
+        $get    = $this->input->get();
+        $table  = base64_decode($get['t']);
+        $id     = $get['i'];
+        $val    = $get['v'];
+        $fld    = $get['f'];
+
+        $this->model->set_table($table);
+        if($this->model->update($id,array($fld => $val))){
+            log_message('DEBUG','ADMIN : edit_field : success : '.json_encode($get));
+            echo 1;
+        }else{
+            log_message('DEBUG','ADMIN : edit_field : failed : '.json_encode($get));
+            echo 0;
+        }
+    }
+
+    public function modules(){
+
+        $this->db_exp->set_table('modules');
+        $this->db_exp->render('row_list');
+        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div>';
+
     }
 
 
