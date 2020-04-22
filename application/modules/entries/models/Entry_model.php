@@ -83,7 +83,7 @@ class Entry_model extends CI_Model
             $this->db->like('name', $name);
 
         if ($passport_no != null)
-            $this->db->like('passport_number', $passport_no);
+            $this->db->like('ID_number', $passport_no);
 
         if ($vessel != null)
             $this->db->like('vessel', $vessel);

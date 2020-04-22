@@ -23,14 +23,13 @@ function suggest_districts() {
     //XMLhttpRequest Object
     let xhr = new XMLHttpRequest(),
         method = "POST",
-        url = base_url + 'welcome/get_districts';
+        url = base_url + 'welcome/get_districts/' + region_id;
 
     xhr.open(method, url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = xhr.responseText;
             e = document.getElementById('district_id');
-            alert(response);
             if (response !== "") {
                 e.innerHTML = response;
                 e.style.display = "block";
@@ -39,5 +38,5 @@ function suggest_districts() {
             }
         }
     };
-    xhr.send(formData);
+    xhr.send();
 }

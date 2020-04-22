@@ -33,13 +33,12 @@
                     <tr>
                         <th width="3%"></th>
                         <th width="15%">Name</th>
-                        <th width="6%">Age</th>
-                        <th width="6%">Sex</th>
-                        <th width="10%">Passport No.</th>
+                        <th width="10%">Category</th>
+                        <th width="10%">Identification</th>
                         <th width="10%">Nationality</th>
-                        <th width="10%">Flight/Vehicle</th>
+                        <th width="10%">Vessel Name/No</th>
                         <th width="10%">Arrival Date</th>
-                        <th width="30%">Temp (&#8451;)</th>
+                        <th width="10%">Temp (&#8451;)</th>
                     </tr>
                     </thead>
 
@@ -52,11 +51,10 @@
                                 <td>
                                     <a href="<?= site_url('entries/details/' . $values->id) ?>"><?= $values->name ?></a>
                                 </td>
-                                <td><?= $values->age ?></td>
-                                <td><?= $values->sex ?></td>
-                                <td><?= $values->passport_number ?></td>
-                                <td><?= $values->nationality ?></td>
-                                <td><?= $values->flight ?></td>
+                                <td><?= $values->form_type ?></td>
+                                <td><?= $values->ID_type . '<br/>' . $values->ID_number ?></td>
+                                <td><?= $values->country->name ?></td>
+                                <td><?= $values->vessel ?></td>
                                 <td><?= date('d M, Y', strtotime($values->created_at)) ?></td>
                                 <td>
                                     <form id="formElem" method="post">
@@ -109,8 +107,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Passport No.</label>
-                                    <?= form_input(['name' => 'passport_no', 'id' => 'passport_no', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Passport No ...']) ?>
+                                    <label>Identification No.</label>
+                                    <?= form_input(['name' => 'ID_No', 'id' => 'ID_No', 'type' => 'text', 'class' => 'form-control', 'placeholder' => 'Identification No ...']) ?>
                                 </div><!--./form-group -->
                             </div><!--./col-md-12 -->
                         </div><!--./row -->

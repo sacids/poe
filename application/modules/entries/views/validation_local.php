@@ -56,22 +56,26 @@
         let IdType = document.getElementById("id_type").value;
         let IdNo = document.getElementById("identification_number").value;
         let transportMeans = document.getElementById("transport_means").value;
-        let vessel = document.getElementById("vessel").value;
+        let transport_name = document.getElementById("transport_name").value;
         let arrivalDate = document.getElementById("arrival_date").value;
         let pointOfEntry = document.getElementById("point_of_entry").value;
         let stayDuration = document.getElementById("duration_stay").value;
         let employment = document.getElementById("employment").value;
-        let regionOrigin = document.getElementById("region_origin").value;
+        let regionOrigin = document.getElementById("location_origin").value;
 
         let region = document.getElementById("region_id").value;
         let mobile = document.getElementById("mobile").value;
+        let email = document.getElementById("email").value;
+
+        let date = document.getElementsByName("date[]");
+        let days = document.getElementsByName("days[]");
 
         let symptoms = document.getElementsByName("symptoms[]");
 
         //validate per current tab
         //tab 1 validation
         if (currentTab === 0) {
-            let errorName = errorAge = errorSex = errorNationality = errorIdType = errorIdNo = errorTransportMeans = errorVessel = errorArrivalDate = errorPointOfEntry = true;
+            let errorName = errorAge = errorSex = errorNationality = errorIdType = errorIdNo = errorTransportMeans = errorTransportName = errorArrivalDate = errorPointOfEntry = true;
 
             // Validate name
             if (name === "") {
@@ -138,12 +142,12 @@
                 errorTransportMeans = false;
             }
 
-            //validate vessel
-            if (vessel === "") {
-                printError("errorVessel", "<?php echo $this->lang->line('required_transport_means_name'); ?>")
+            //validate transport name
+            if (transport_name === "") {
+                printError("errorTransportName", "<?php echo $this->lang->line('required_transport_means_name'); ?>")
             } else {
-                printError("errorVessel", "");
-                errorVessel = false;
+                printError("errorTransportName", "");
+                errorTransportName = false;
             }
 
             //validate arrivalDate
@@ -180,10 +184,9 @@
             }
 
             //check all data in tab one
-            if ((errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorVessel || errorArrivalDate || errorPointOfEntry) === true) {
+            if ((errorName || errorAge || errorSex || errorNationality || errorIdNo || errorTransportMeans || errorTransportName || errorArrivalDate || errorPointOfEntry) === true) {
                 return false;
             }
-
             return true;
 
             //tab 2 validation
@@ -237,8 +240,13 @@
             if (mobile === "") {
                 printError("errorMobile", "<?php echo $this->lang->line('required_mobile');?>");
             } else {
-                printError("errorMobile", "");
-                errorMobile = false;
+                let regex = /^\d{10}$/;
+                if (regex.test(mobile) === false) {
+                    printError("errorMobile", "<?php echo $this->lang->line('invalid_mobile');?>");
+                } else {
+                    printError("errorMobile", "");
+                    errorMobile = false;
+                }
             }
 
             //check all data in tab one
@@ -265,6 +273,49 @@
             return true;
 
         } else if (currentTab === 4) {
+            let errorDate = errorDays = true;
+
+            //date
+            if (date.length > 0) {
+                let today = new Date();
+                //date
+                let day = today.getDate();
+                day = (day < 10) ? '0' + day : day;
+
+                //month
+                let month = today.getMonth() + 1;
+                month = (month < 10) ? '0' + month : month;
+
+                //year
+                let year = today.getFullYear();
+                let currentDate = year + '-' + month + '-' + day;
+
+                for (let i = 0; i < date.length; i++) {
+                    if (date[i].value > currentDate) {
+                        printError("errorDate", "<?php echo $this->lang->line('invalid_date'); ?>");
+                    } else {
+                        printError("errorDate", "");
+                        errorDate = false;
+                    }
+                }
+            }
+
+            //no of days
+            if (days.length > 0) {
+                for (let i = 0; i < days.length; i++) {
+                    if (days[i].value > 21) {
+                        printError("errorDays", "<?php echo $this->lang->line('invalid_no_of_days'); ?>");
+                    } else {
+                        printError("errorDays", "");
+                        errorDays = false;
+                    }
+                }
+            }
+
+            //check all data in tab 3
+            if ((errorDate || errorDays) === true) {
+                return false;
+            }
             return true;
         } else if (currentTab === 5) {
             return true;

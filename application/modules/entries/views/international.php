@@ -53,7 +53,7 @@
                         <!-- form -->
                         <form id="regForm" action="<?= site_url('entries/international') ?>" method="post">
                             <input type="hidden" id="base_url" name="base_url" value="<?= base_url() ?>"/>
-                            <?php echo form_hidden('form_type', 'International'); ?>
+                            <?php echo form_hidden('form_type', 'INTERNATIONAL'); ?>
                             <div class="tab" id="tab1">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -132,7 +132,7 @@
                                                 '' => $this->lang->line('lbl_select_transport_means'),
                                                 'Flight' => $this->lang->line('lbl_transport_means_flight'),
                                                 'Vehicle' => $this->lang->line('lbl_transport_means_vehicle'),
-                                                'Ship' => $this->lang->line('lbl_transport_means_ship')
+                                                'Vessel' => $this->lang->line('lbl_transport_means_vessel')
                                             ];
                                             echo form_dropdown('transport_means', $_options, set_value('transport_means'), 'class="form-control" id="transport_means"'); ?>
                                             <span id="errorTransportMeans" style="color: red;"></span>
@@ -143,8 +143,8 @@
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_transport_means_name') ?> <span
                                                         style="color: red;">*</span></label>
-                                            <?php echo form_input(['id' => 'vessel', 'name' => 'vessel', 'class' => 'form-control', 'placeholder' => $this->lang->line('lbl_write_transport_means_name')]); ?>
-                                            <span id="errorVessel" style="color: red;"></span>
+                                            <?php echo form_input(['id' => 'transport_name', 'name' => 'transport_name', 'class' => 'form-control', 'placeholder' => $this->lang->line('lbl_write_transport_means_name')]); ?>
+                                            <span id="errorTransportName" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
 
@@ -177,7 +177,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_seat_no') ?></label>
-                                            <?php echo form_input(['id' => 'seat_no', 'name' => 'seat_no', 'class' => 'form-control', 'placeholder' => $this->lang->line('lbl_write_seat_no')]); ?>
+                                            <?php echo form_input(['id' => 'seat_no', 'name' => 'seat_no', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => $this->lang->line('lbl_write_seat_no')]); ?>
                                             <span id="errorSeatNo" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
@@ -216,9 +216,8 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
-                                            <label><?= $this->lang->line('lbl_duration_of_stay') ?> <span
-                                                        style="color: red;">*</span></label>
-                                            <?php echo form_input(['id' => 'duration_stay', 'name' => 'duration_stay', 'type' => 'number', 'min' => 0, 'class' => 'form-control']); ?>
+                                            <label><?= $this->lang->line('lbl_duration_of_stay_tanzania') ?></label>
+                                            <?php echo form_input(['id' => 'duration_stay', 'name' => 'duration_stay', 'type' => 'number', 'min' => 1, 'class' => 'form-control']); ?>
                                             <span id="errorStayDuration" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
@@ -278,7 +277,7 @@
                                                 }
                                             }
                                             $region_option = ['' => $this->lang->line('lbl_select')] + $region_option;
-                                            echo form_dropdown('region_id', $region_option, set_value('region_id'), 'class="form-control" id="region_id" onChange="suggest_districts()"'); ?>
+                                            echo form_dropdown('region_id', $region_option, set_value('region_id'), 'class="form-control" id="region_id" onChange="suggest_districts();"'); ?>
                                             <span id="errorRegion" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
@@ -318,7 +317,7 @@
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_email') ?> <span
                                                         style="color: red;">*</span></label>
-                                            <?php echo form_input(['id' => 'email', 'name' => 'email', 'class' => 'form-control', 'placeholder' => $this->lang->line('lbl_write_email')]); ?>
+                                            <?php echo form_input(['id' => 'email', 'name' => 'email', 'type' => 'email', 'class' => 'form-control', 'placeholder' => $this->lang->line('lbl_write_email'), 'onkeyup' => 'this.value = this.value.toLowerCase();']); ?>
                                             <span id="errorEmail" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
@@ -335,11 +334,11 @@
                                             $_options = [];
                                             if (isset($countries) && $countries) {
                                                 foreach ($countries as $country) {
-                                                    $_options[$country->code] = $country->name;
+                                                    $_options[$country->id] = $country->name;
                                                 }
                                             }
                                             $_options = ['' => $this->lang->line('lbl_select')] + $_options;
-                                            echo form_dropdown('country_origin', $_options, set_value('country_origin'), 'class="form-control" id="country_origin"'); ?>
+                                            echo form_dropdown('location_origin', $_options, set_value('location_origin'), 'class="form-control" id="location_origin"'); ?>
                                             <span id="errorCountryOrigin" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-6 -->
@@ -372,8 +371,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_location_country') ?></label>
-                                            <?php echo form_input(['id' => 'location[]', 'name' => 'location', 'class' => 'form-control', 'type' => 'text']); ?>
-                                            <span style="color: red;"><?= form_error('location'); ?></span>
+                                            <?php echo form_input(['id' => 'location[]', 'name' => 'location[]', 'class' => 'form-control', 'type' => 'text']); ?>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-2 -->
 
@@ -381,15 +379,15 @@
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_date') ?></label>
                                             <?php echo form_input(['id' => 'date', 'name' => 'date[]', 'class' => 'form-control', 'type' => 'date']); ?>
-                                            <span style="color: red;"><?= form_error('date[]'); ?></span>
+                                            <span id="errorDate" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-2 -->
 
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label><?= $this->lang->line('lbl_no_of_days') ?></label>
-                                            <?php echo form_input(['id' => 'days', 'name' => 'days[]', 'class' => 'form-control', 'type' => 'number']); ?>
-                                            <span style="color: red;"><?= form_error('days[]'); ?></span>
+                                            <?php echo form_input(['id' => 'days', 'name' => 'days[]', 'class' => 'form-control', 'type' => 'number', 'min' => 1]); ?>
+                                            <span id="errorDays" style="color: red;"></span>
                                         </div><!--./form-group -->
                                     </div><!--./col-lg-2 -->
                                 </div><!--./row -->
@@ -421,7 +419,7 @@
                                             echo form_radio('visit_area_ebola', 'Yes', NULL, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('visit_area_ebola', 'No', NULL, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'No'));
+                                            echo form_radio('visit_area_ebola', 'No', TRUE, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label>';
                                             ?>
                                             <span id="errorVisitedAreaEbola" style="color: red;"></span>
@@ -435,7 +433,7 @@
                                             echo form_radio('taken_care_sick_person_ebola', 'Yes', NULL, 'id="taken_care_sick_person_ebola" ' . set_radio('taken_care_sick_person_ebola', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('taken_care_sick_person_ebola', 'No', NULL, 'id="taken_care_sick_person_ebola" ' . set_radio('taken_care_sick_person_ebola', 'No'));
+                                            echo form_radio('taken_care_sick_person_ebola', 'No', TRUE, 'id="taken_care_sick_person_ebola" ' . set_radio('taken_care_sick_person_ebola', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
                                             <span id="errorTakeCareSickPersonEbola" style="color: red;"></span>
                                         </div><!--./form-group -->
@@ -448,7 +446,7 @@
                                             echo form_radio('participated_burial_ebola', 'Yes', NULL, 'id="participated_burial_ebola" ' . set_radio('participated_burial_ebola', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('participated_burial_ebola', 'No', NULL, 'id="participated_burial_ebola" ' . set_radio('participated_burial_ebola', 'No'));
+                                            echo form_radio('participated_burial_ebola', 'No', TRUE, 'id="participated_burial_ebola" ' . set_radio('participated_burial_ebola', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
                                             <span id="errorParticipateBurialEbola" style="color: red;"></span>
                                         </div><!--./form-group -->
@@ -456,7 +454,7 @@
                                 </div><!--./row -->
                             </div><!--./tab -->
 
-                            <div class="tab" id="tab6">
+                            <div class="tab" id="tab7">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h6 class="title"><?= $this->lang->line('lbl_last_21_days_have_you') ?></h6>
@@ -471,7 +469,7 @@
                                             echo form_radio('visit_area_corona', 'Yes', NULL, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('visit_area_corona', 'No', NULL, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'No'));
+                                            echo form_radio('visit_area_corona', 'No', true, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label>';
                                             ?>
                                             <span id="errorVisitedAreaCorona" style="color: red;"></span>
@@ -485,7 +483,7 @@
                                             echo form_radio('taken_care_sick_person_corona', 'Yes', NULL, 'id="taken_care_sick_person_corona" ' . set_radio('taken_care_sick_person_corona', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('taken_care_sick_person_corona', 'No', NULL, 'id="taken_care_sick_person_corona" ' . set_radio('taken_care_sick_person_corona', 'No'));
+                                            echo form_radio('taken_care_sick_person_corona', 'No', true, 'id="taken_care_sick_person_corona" ' . set_radio('taken_care_sick_person_corona', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
                                             <span id="errorTakeCareSickPersonCorona" style="color: red;"></span>
                                         </div><!--./form-group -->
@@ -498,7 +496,7 @@
                                             echo form_radio('participated_burial_corona', 'Yes', NULL, 'id="participated_burial_corona" ' . set_radio('participated_burial_corona', 'Yes'));
                                             echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
 
-                                            echo form_radio('participated_burial_corona', 'No', NULL, 'id="participated_burial_corona" ' . set_radio('participated_burial_corona', 'No'));
+                                            echo form_radio('participated_burial_corona', 'No', true, 'id="participated_burial_corona" ' . set_radio('participated_burial_corona', 'No'));
                                             echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
                                             <span id="errorParticipateBurialCorona" style="color: red;"></span>
                                         </div><!--./form-group -->
@@ -506,7 +504,7 @@
                                 </div><!--./row -->
                             </div><!--./tab -->
 
-                            <div class="tab" id="tab7">
+                            <div class="tab" id="tab8">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h6 class="title"><?= $this->lang->line('lbl_experienced_following_conditions') ?></h6>

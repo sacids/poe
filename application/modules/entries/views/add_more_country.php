@@ -19,19 +19,21 @@
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label><?php echo $this->lang->line("lbl_location_country") ?></label>' +
-            '<input type="text" name="location[]" id="location" class="form-control"/>' +
+            '<input type="text" name="location[]" id="location[]" class="form-control"/>' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label><?php echo $this->lang->line("lbl_date") ?></label>' +
-            '<input type="date" name="date[]" id="date" class="form-control"/>' +
+            '<input type="date" name="date[]" id="date[]" class="form-control"/>' +
+            '<span id="errorDate" style="color: red;"></span>' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label><?php echo $this->lang->line("lbl_no_of_days") ?></label>' +
-            '<input type="number" name="days[]" id="days" class="form-control"/>' +
+            '<input type="number" min="1" name="days[]" id="days[]" class="form-control"/>' +
+            '<span id="errorDays" style="color: red;"></span>' +
             '</div>' +
             '</div>';
 

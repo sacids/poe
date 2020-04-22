@@ -18,7 +18,7 @@ $lang['port_health'] = 'Port Health';
 //traveller surveillance form
 $lang['traveller_surveillance_form'] = 'Traveller Surveillance Form';
 $lang['lbl_international'] = 'International';
-$lang['lbl_local'] = 'Local';
+$lang['lbl_local'] = 'Domestic';
 
 //traveller information
 $lang['lbl_select'] = '-- Select --';
@@ -63,11 +63,11 @@ $lang['lbl_transport_means'] = 'Means of Transport';
 $lang['lbl_select_transport_means'] = '-- Select --';
 $lang['lbl_transport_means_flight'] = 'Flight';
 $lang['lbl_transport_means_vehicle'] = 'Vehicle';
-$lang['lbl_transport_means_ship'] = 'Ship';
+$lang['lbl_transport_means_vessel'] = 'Vessel';
 $lang['required_transport_means'] = 'Means of Transport required';
-$lang['lbl_transport_means_name'] = 'Vessel Name/No';
-$lang['lbl_write_transport_means_name'] = 'Write Vessel Name/No...';
-$lang['required_transport_means_name'] = 'Vessel Name/No is required';
+$lang['lbl_transport_means_name'] = 'Vessel/Flight/Vehicle Name/No';
+$lang['lbl_write_transport_means_name'] = 'Write Vessel/Flight/Vehicle Name/No...';
+$lang['required_transport_means_name'] = 'Vessel/Flight/Vehicle Name/No is required';
 
 
 $lang['lbl_arrival_date'] = 'Arrival Date';
@@ -79,6 +79,7 @@ $lang['lbl_select_point_of_entry'] = '--Select --';
 $lang['require_point_of_entry'] = 'Point of entry is required';
 $lang['lbl_seat_no'] = 'Seat No.';
 $lang['lbl_write_seat_no'] = 'Write seat number...';
+
 $lang['lbl_purpose_of_visit_tanzania'] = 'Purpose of Visit in Tanzania';
 $lang['lbl_purpose_of_visit'] = 'Purpose of Visit';
 $lang['lbl_select_purpose_of_visit'] = '--Select --';
@@ -116,6 +117,7 @@ $lang['lbl_write_street'] = 'Write Street/Ward...';
 $lang['lbl_mobile'] = 'Mobile Number';
 $lang['lbl_write_mobile'] = 'Write Mobile Number...';
 $lang['required_mobile'] = 'Mobile Number is required';
+$lang['invalid_mobile'] = 'Invalid Mobile Number. e.g 0717000000';
 $lang['lbl_email'] = 'Email';
 $lang['lbl_write_email'] = 'Write Email...';
 $lang['required_email'] = 'Email is required';
@@ -138,7 +140,9 @@ $lang['lbl_location_country'] = 'Location visited/Province';
 $lang['lbl_location_region'] = 'Location visited/District';
 $lang['lbl_write_location'] = 'Write Location visited/Province...';
 $lang['lbl_date'] = 'Date';
+$lang['invalid_date'] = 'Date should not be greater or equal to today';
 $lang['lbl_no_of_days'] = 'No. of Days';
+$lang['invalid_no_of_days'] = 'No. of Days should not be greater than 21';
 $lang['lbl_write_no_of_days'] = 'Write Number of Days...';
 $lang['lbl_add_another'] = 'Add Another';
 $lang['lbl_last_21_days_have_you'] = 'In the last 21 days (3 weeks) have you';
@@ -146,6 +150,7 @@ $lang['lbl_visited_case_due_to_ebola'] = 'Visited/Resided in an area with cases/
 $lang['lbl_visited_case_due_to_corona'] = 'Visited/Resided in an area with cases/deaths due to Corona/COVID-19?';
 $lang['lbl_participate_take_care_sick_person'] = 'Participated in taken care of the sick person?';
 $lang['lbl_participate_burial_of_dead_person'] = 'Participated in the burial of dead person?';
+$lang['required_option'] = 'This option is required';
 $lang['lbl_experienced_following_conditions'] = 'Have you experienced the following conditions during the last 21 days (3 week)?';
 $lang['lbl_other_symptoms'] = 'Others symptoms (specify)';
 $lang['lbl_fever'] = 'Fever';
@@ -170,9 +175,9 @@ $lang['required_symptoms'] = 'Symptoms required';
 $lang['lbl_previous'] = 'Previous';
 $lang['lbl_next'] = 'Next';
 $lang['lbl_save'] = 'Save';
+$lang['lbl_successful_msg'] = 'Information registered successfully';
+$lang['lbl_failed_msg'] = 'Failed to register your information';
 
-$lang['lbl_yes'] = 'Yes';
-$lang['lbl_no'] = 'No';
 
 
 

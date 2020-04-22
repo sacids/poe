@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller
 {
@@ -24,10 +24,9 @@ class Welcome extends CI_Controller
         $this->load->view('welcome_message');
     }
 
-    //get districts
-    function get_districts()
+
+    function get_districts($region_id)
     {
-        $region_id = $_POST['region_id'];
         log_message("DEBUG", "REACHES HERE");
         log_message("DEBUG", "region_id => " . $region_id);
 

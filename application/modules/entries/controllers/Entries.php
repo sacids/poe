@@ -51,7 +51,7 @@ class Entries extends MX_Controller
                 'id_type' => $this->input->post('id_type'),
                 'ID_number' => $this->input->post('passport_number'),
                 'transport_means' => $this->input->post('transport_means'),
-                'vessel' => $this->input->post('vessel'),
+                'transport_name' => $this->input->post('transport_name'),
                 'arrival_date' => $this->input->post('arrival_date'),
                 'point_of_entry' => $this->input->post('point_of_entry'),
                 'seat_no' => $this->input->post('seat_no'),
@@ -66,7 +66,7 @@ class Entries extends MX_Controller
                 'street' => $this->input->post('street'),
                 'mobile' => $this->input->post('mobile'),
                 'email' => $this->input->post('email'),
-                'location_origin' => $this->input->post('country_origin'),
+                'location_origin' => $this->input->post('location_origin'),
                 'visit_area_ebola' => $this->input->post('visit_area_ebola'),
                 'taken_care_sick_person_ebola' => $this->input->post('taken_care_sick_person_ebola'),
                 'participated_burial_ebola' => $this->input->post('participated_burial_ebola'),
@@ -78,6 +78,10 @@ class Entries extends MX_Controller
                 'created_at' => date('Y-m-d H:i:s')
             );
 
+            $score = $this->calculate_score($data);
+            $data['score'] = $score;
+
+            //insert data
             if ($id = $this->entry_model->insert($data)) {
                 //todo: countries visited within 24 hours
                 if ($_POST['country']) {
@@ -94,9 +98,9 @@ class Entries extends MX_Controller
                     }
                 }
 
-                $this->session->set_flashdata('message', display_message('Information registered successfully'));
+                $this->session->set_flashdata('message', display_message($this->lang->line('lbl_successful_msg')));
             } else {
-                $this->session->set_flashdata('message', display_message('Failed to register your information', 'danger'));
+                $this->session->set_flashdata('message', display_message($this->lang->line('lbl_failed_msg'), 'danger'));
             }
             redirect('entries/international', 'refresh');
         }
@@ -146,7 +150,7 @@ class Entries extends MX_Controller
                 'id_type' => $this->input->post('id_type'),
                 'ID_number' => $this->input->post('identification_number'),
                 'transport_means' => $this->input->post('transport_means'),
-                'vessel' => $this->input->post('vessel'),
+                'transport_name' => $this->input->post('transport_name'),
                 'arrival_date' => $this->input->post('arrival_date'),
                 'point_of_entry' => $this->input->post('point_of_entry'),
                 'seat_no' => $this->input->post('seat_no'),
@@ -173,6 +177,9 @@ class Entries extends MX_Controller
                 'created_at' => date('Y-m-d H:i:s')
             );
 
+            $score = $this->calculate_score($data);
+            $data['score'] = $score;
+
             if ($id = $this->entry_model->insert($data)) {
                 //todo: countries visited within 24 hours
                 if ($_POST['region']) {
@@ -189,9 +196,9 @@ class Entries extends MX_Controller
                     }
                 }
 
-                $this->session->set_flashdata('message', display_message('Information registered successfully'));
+                $this->session->set_flashdata('message', display_message($this->lang->line('lbl_successful_msg')));
             } else {
-                $this->session->set_flashdata('message', display_message('Failed to register your information', 'danger'));
+                $this->session->set_flashdata('message', display_message($this->lang->line('lbl_failed_msg'), 'danger'));
             }
             redirect('entries/local', 'refresh');
         }
@@ -230,21 +237,32 @@ class Entries extends MX_Controller
         if (isset($_POST['search'])) {
             //post data
             $name = $this->input->post('name');
-            $passport_no = $this->input->post('passport_no');
-            $vessel = $this->input->post('passport_no');
+            $ID_No = $this->input->post('ID_number');
+            $vessel = $this->input->post('vessel');
             $arrival_date = $this->input->post('arrival_date');
 
             //search
-            $entries = $this->entry_model->search_all($name, $passport_no, $vessel, $arrival_date);
+            $entries = $this->entry_model->search_all($name, $ID_No, $vessel, $arrival_date);
 
-            if ($entries)
+            if ($entries) {
                 $this->data['entries'] = $entries;
-            else
+
+                foreach ($this->data['entries'] as $k => $v) {
+                    $this->model->set_table('countries');
+                    $this->data['entries'][$k]->country = $this->model->get_by('code', $v->nationality);
+                }
+            } else {
                 $this->data['entries'] = [];
+            }
         } else {
             //table data
             $entries = $this->entry_model->get_all();
             $this->data['entries'] = $entries;
+
+            foreach ($this->data['entries'] as $k => $v) {
+                $this->model->set_table('countries');
+                $this->data['entries'][$k]->country = $this->model->get_by('code', $v->nationality);
+            }
         }
 
         //render view
@@ -337,5 +355,39 @@ class Entries extends MX_Controller
     /*===========================================
     Callback functions
     ===========================================*/
+    function calculate_score($postVars)
+    {
+        $form_type = $postVars['form_type'];
+        $location_id = $postVars['location_origin'];
 
+        //location score
+        $location = [];
+        if (strtoupper($form_type) == 'INTERNATIONAL') {
+            $this->model->set_table('countries');
+            $location = $this->model->get($location_id);
+        } else if (strtoupper($form_type) == 'DOMESTIC') {
+            $location = $this->region_model->get($location_id);
+        }
+
+        //symptoms score
+        $symptoms = $_POST['symptoms'];
+        $symptoms_score = $this->symptoms_score($symptoms);
+
+        return $location->score + $symptoms_score;
+    }
+
+    //calculate sum score of threshold
+    function symptoms_score($symptoms)
+    {
+        $sum = 0;
+        $query = $this->db->select('SUM(score) as score')->where_in('id', $symptoms)->get('symptoms')->result();
+        log_message("DEBUG", "query => " . $this->db->last_query());
+
+        foreach ($query as $value) {
+            if ($value->score != null)
+                $sum = $value->score;
+        }
+        log_message("DEBUG", "score => " . $sum);
+        return $sum;
+    }
 }

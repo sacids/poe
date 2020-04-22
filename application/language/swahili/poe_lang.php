@@ -16,13 +16,13 @@ $lang['ministry_of_health'] = 'Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee
 $lang['port_health'] = 'Port Health';
 
 //traveller surveillance form
-$lang['traveller_surveillance_form'] = 'Fomu ya ufatiliaji wa magonjwa kwa abiria';
+$lang['traveller_surveillance_form'] = 'Fomu ya ufuatiliaji wa magonjwa kwa abiria';
 $lang['lbl_international'] = 'Kimataifa';
-$lang['lbl_local'] = 'Nyumbani';
+$lang['lbl_local'] = 'Wasafiri wa Ndani';
 
 //traveller information
 $lang['lbl_select'] = '-- Chagua --';
-$lang['lbl_yes'] = 'Ndio';
+$lang['lbl_yes'] = 'Ndiyo';
 $lang['lbl_no'] = 'Hapana';
 $lang['traveller_information'] = 'Taarifa ya abiria';
 $lang['lbl_full_name'] = 'Jina Kamili (Jina la kwanza  Jina la kati Jina la ukoo)';
@@ -64,11 +64,11 @@ $lang['lbl_transport_means'] = 'Aina ya usafiri';
 $lang['lbl_select_transport_means'] = '-- Chagua --';
 $lang['lbl_transport_means_flight'] = 'Ndege';
 $lang['lbl_transport_means_vehicle'] = 'Gari';
-$lang['lbl_transport_means_ship'] = 'Meli';
+$lang['lbl_transport_means_vessel'] = 'Meli';
 $lang['required_transport_means'] = 'Aina ya usafiri inahitajika';
-$lang['lbl_transport_means_name'] = 'Jina/Namba ya chombo cha usafiri';
-$lang['lbl_write_transport_means_name'] = 'Andika jina/namba ya chombo...';
-$lang['required_transport_means_name'] = 'Jina/Namba ya chombo cha usafiri inahitajika';
+$lang['lbl_transport_means_name'] = 'Namba ya Meli/Ndege/Basi/Gari ';
+$lang['lbl_write_transport_means_name'] = 'Andika Namba ya Meli/Ndege/Basi/Gari ...';
+$lang['required_transport_means_name'] = 'Namba ya Meli/Ndege/Basi/Gari inahitajika';
 $lang['lbl_arrival_date'] = 'Tarehe ya Kuwasili';
 $lang['lbl_write_arrival_date'] = 'Andika tarehe ya kuwasili...';
 $lang['require_arrival_date'] = 'Tarehe ya Kuwasili inahitajika';
@@ -78,6 +78,7 @@ $lang['lbl_select_point_of_entry'] = '-- Chagua --';
 $lang['require_point_of_entry'] = 'Sehemu ulipowasili inahijika';
 $lang['lbl_seat_no'] = 'Namba ya Kiti';
 $lang['lbl_write_seat_no'] = 'Andika namba ya kiti...';
+$lang['lbl_purpose_of_visit_tanzania'] = 'Lengo la safari Tanzania';
 $lang['lbl_purpose_of_visit'] = 'Lengo la safari';
 $lang['lbl_select_purpose_of_visit'] = '-- Chagua --';
 $lang['lbl_purpose_of_visit_resident'] = 'Mkazi';
@@ -86,7 +87,9 @@ $lang['lbl_purpose_of_visit_transit'] = 'Mpito';
 $lang['lbl_purpose_of_visit_business'] = 'Biashara';
 $lang['required_purpose_of_visit_tanzania'] = 'Lengo la safari linahitajika';
 $lang['required_purpose_of_visit'] = 'Lengo la safari linahitajika';
+$lang['lbl_other_purpose_of_visit_tanzania'] = 'Lengo Lingine la safari Tanzania (Taja)';
 $lang['lbl_other_purpose_of_visit'] = 'Lengo lingine (Taja)';
+
 $lang['lbl_duration_of_stay_tanzania'] = 'Idadi ya siku utakazokaa - Kwa wasio raia wa Tanzania';
 $lang['lbl_duration_of_stay'] = 'Idadi ya siku utakazokaa';
 $lang['lbl_write_duration_of_stay'] = 'Andika Idadi ya siku utakazokaa...';
@@ -114,6 +117,7 @@ $lang['lbl_write_street'] = 'Andika Mtaa/Kata...';
 $lang['lbl_mobile'] = 'Simu ya mkononi';
 $lang['lbl_write_mobile'] = 'Andika namba ya simu ya mkononi...';
 $lang['required_mobile'] = 'Namba ya simu inahitajika';
+$lang['invalid_mobile'] = 'Umekosea namba ya simu. mfano 0717000000';
 $lang['lbl_email'] = 'Barua pepe';
 $lang['lbl_write_email'] = 'Andika barua pepe...';
 $lang['required_email'] = 'Barua pepe inahitajika';
@@ -135,7 +139,9 @@ $lang['lbl_location_country'] = 'Mahali ulipotembelea';
 $lang['lbl_location_region'] = 'Mahali ulipotembelea/Wilaya';
 $lang['lbl_write_location'] = 'Andika mahali ulipotembelea...';
 $lang['lbl_date'] = 'Tarehe';
+$lang['invalid_date'] = 'Tarehe haitakiwi kuwa sawa au kuzidi leo';
 $lang['lbl_no_of_days'] = 'Muda wa siku';
+$lang['invalid_no_of_days'] = 'Muda wa siku hautakiwi kuzidi 21';
 $lang['lbl_write_no_of_days'] = 'Andika muda wa siku...';
 $lang['lbl_add_another'] = 'Ongeza';
 
@@ -144,6 +150,7 @@ $lang['lbl_visited_case_due_to_ebola'] = 'Kutembelea/kuishi kwenye maeneo yenye 
 $lang['lbl_visited_case_due_to_corona'] = 'Kutembelea/kuishi kwenye maeneo yenye mlipuko wa Corona/COVID-19?';
 $lang['lbl_participate_take_care_sick_person'] = 'Kuhusika katika kumwuguza mgonjwa?';
 $lang['lbl_participate_burial_of_dead_person'] = 'Kushiriki mazishi ya mtu aliyekufa?';
+$lang['required_option'] = 'Inahitajika';
 $lang['lbl_experienced_following_conditions'] = 'Umewahi kuwa na dalili zifuatazo ndani ya siku 7 (Juma moja) zilizopita?';
 $lang['lbl_other_symptoms'] = 'Dalili zingine (Taja)';
 $lang['lbl_fever'] = 'Homa';
@@ -168,6 +175,8 @@ $lang['required_symptoms'] = 'Dalili zinahitajika';
 $lang['lbl_previous'] = 'Nyuma';
 $lang['lbl_next'] = 'Mbele';
 $lang['lbl_save'] = 'Hifadhi';
+$lang['lbl_successful_msg'] = 'Umefanikiwa kukusanya taarifa zako';
+$lang['lbl_failed_msg'] = 'Taarifa zako hazikusanywa kwa usahihi';
 
 
 

@@ -24,6 +24,12 @@ class Region_model extends CI_Model
         return $this->db->get_where($this->table, $where)->result();
     }
 
+    //get
+    function get($id)
+    {
+        return $this->db->get_where($this->table, ['id' => $id])->row();
+    }
+
     //get by
     function get_by($where)
     {
