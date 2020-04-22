@@ -45,15 +45,25 @@ class Manage extends MX_Controller{
 
         if($this->manage_tbl('modules')) return;
 
+        $data['title']      = 'Module Management';
+        $data['description']    = 'Setup modules and corresponding methods for use within the system';
+        $this->load->view('admin/common/title',$data);
+
         $this->db_exp->set_table('modules');
         $this->db_exp->render('row_list');
-        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+        $output['output']   = $this->db_exp->output;
+        $this->load->view('admin/db_exp/render',$output);
 
     }
 
     public function users(){
 
+
         if($this->manage_tbl('users')) return;
+
+        $data['title']      = 'User Management';
+        $data['description']    = 'Add users, delete users, set passwords and permissions';
+        $this->load->view('admin/common/title',$data);
 
         $this->db_exp->set_table('users');
         $this->db_exp->set_hidden(
@@ -64,22 +74,25 @@ class Manage extends MX_Controller{
                 'active'
             )
         );
-        $this->db_exp->render('row_list');
-        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
 
+        $this->db_exp->render('row_list');
+        $output['output']   = $this->db_exp->output;
+        $this->load->view('admin/db_exp/render',$output);
     }
 
     public function edit_modules(){
         $this->db_exp->set_table('modules');
         $this->db_exp->render('edit');
-        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+        $output['output']   = $this->db_exp->output;
+        $this->load->view('admin/db_exp/render',$output);
     }
     public function module_links(){
         
         $this->db_exp->set_table('module_links');
         $this->db_exp->set_hidden('module_id',$this->input->post('id'));
         $this->db_exp->render('row_list');
-        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+        $output['output']   = $this->db_exp->output;
+        $this->load->view('admin/db_exp/render',$output);
 
     }
 
@@ -139,7 +152,8 @@ class Manage extends MX_Controller{
         $this->db_exp->set_search_condition('user_id = "'.$this->input->post('id').'"');
         $this->db_exp->render('row_list');
         //echo $this->db_exp->output;
-        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+        $output['output']   = $this->db_exp->output;
+        $this->load->view('admin/db_exp/render',$output);
     }
 
 
