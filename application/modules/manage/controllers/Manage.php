@@ -53,10 +53,17 @@ class Manage extends MX_Controller{
 
     public function users(){
 
-        if($this->manage_tbl('modules')) return;
+        if($this->manage_tbl('users')) return;
 
         $this->db_exp->set_table('users');
-        $this->db_exp->set_arg_link("manage/act", '', 'Manage', $icon = 'icon-grid');
+        $this->db_exp->set_hidden(
+            array(
+                'ip_address','salt','sex','activation_code','forgotten_password_code',
+                'forgotten_password_time','password',
+                'remember_code','created_on','last_login',
+                'active'
+            )
+        );
         $this->db_exp->render('row_list');
         echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
 
@@ -75,6 +82,66 @@ class Manage extends MX_Controller{
         echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
 
     }
+
+    public function manage_users($args){
+
+        $this->model->set_table('users');
+        $row            = $this->model->as_array()->get($args['id']);
+        $row['_title']  = 'Manage '.$row['first_name'].' '.$row['last_name'];
+
+        $tabs   = array();
+        $tmp    = array(
+            'label'     => 'Edit',
+            'method'    => 'manage/edit_user',
+            'render'    => 'edit',
+            'args'      => 'id='.$row['id'],
+        );
+        array_push($tabs,$tmp);
+        $tmp    = array(
+            'label'     => 'Change Password',
+            'method'    => 'auth/set_password/'.$row['id'],
+            'render'    => 'list',
+            'args'      => '',
+        );
+        array_push($tabs,$tmp);
+        $tmp    = array(
+            'label'     => 'Groups',
+            'method'    => 'manage/user_groups',
+            'render'    => 'list',
+            'args'      => 'user_id='.$row['id'],
+        );
+        array_push($tabs,$tmp);
+
+        $this->make_tabs($tabs,$row);
+    }
+    public function edit_user(){
+
+        $this->db_exp->set_table('users');
+        $this->db_exp->set_pri_id($this->input->post('id'));
+        $this->db_exp->set_hidden(
+            array(
+                'ip_address','salt','sex','activation_code','forgotten_password_code',
+                'forgotten_password_time','password',
+                'remember_code','created_on','last_login',
+                'active'
+            )
+        );
+        $this->db_exp->render('edit');
+        echo $this->db_exp->output;
+        //echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+    }
+
+    public function user_groups(){
+
+        //print_r($this->input->post());
+        $this->db_exp->set_table('users_groups');
+        $this->db_exp->set_db_select('group_id','groups','id','name');
+        $this->db_exp->set_search_condition('user_id = "'.$this->input->post('id').'"');
+        $this->db_exp->render('row_list');
+        //echo $this->db_exp->output;
+        echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
+    }
+
 
     public function manage_modules($args){
 

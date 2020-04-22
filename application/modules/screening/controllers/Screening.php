@@ -50,7 +50,7 @@ class Screening extends MX_Controller{
         if($this->manage_tbl('entries')) return;
 
         $this->db_exp->set_table('entries');
-        $this->db_exp->set_search_condition('form_type = "'.$type.'"');
+        //$this->db_exp->set_search_condition('form_type = "'.$type.'"');
         $this->db_exp->set_hidden(
             array(
                 'form_type','age','sex','ID_type','transport_means','seat_no',
@@ -63,6 +63,8 @@ class Screening extends MX_Controller{
                 'street','mobile','email','location_origin'
             )
         );
+
+        $this->db_exp->show_insert_button = false;
         $this->db_exp->render('row_list');
         echo '<div class="dbx_wrapper" id="'.uniqid().'">'.$this->db_exp->output.'</div><script> make_table(); </script>';
 
@@ -116,5 +118,15 @@ class Screening extends MX_Controller{
         array_push($tabs,$tmp);
 
         $this->make_tabs($tabs,$row);
+    }
+
+
+
+    public function community(){
+        echo 'community';
+    }
+
+    public function self(){
+        echo 'self';
     }
 }
