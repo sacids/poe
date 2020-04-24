@@ -29,7 +29,7 @@ $(document).ready(function(){
         return;
     });
 
-    $(document).on('click','.subMenu .link', function(e){
+    $(document).on('click','.link', function(e){
 
         var url     = $(this).attr('u');
         $('.subMenu').animate({ 
@@ -74,7 +74,7 @@ $(document).ready(function(){
 
         var method  = $(this).attr('act');
         var data    = $(this).attr('args');
-        alert(method + ' ' + data);
+        //alert(method + ' ' + data);
 
         $('#item_content').html('<div class="d-flex justify-content-center">'+
                 '<div class="spinner-border" role="status">'+
@@ -102,6 +102,47 @@ $(document).ready(function(){
 
         // Avoid submit event to continue normal execution
         e.preventDefault();
+        return false;
+
+    });
+
+    $(document).on('click','.dbx_wrapper input[type="submit"]',function(){
+        
+         //alert('submit');
+        // get the form
+        var form = $(this).closest("form");
+        var action = form.attr('action');
+        var target ;
+
+        if(!form.attr('target')){
+            target = form.parent();
+        }else{
+            target = $('#'+form.attr('target'));
+        }
+
+        var data = new FormData( $(form)[0] );
+
+        var jqXHR = $.ajax({
+            type:"POST",
+            url:action,
+            data:data,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false
+        }).done(function(data){
+            target.html(data);
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            target.html('Temporary error, please try again');
+            if ( console && console.log ) {
+                console.log("Loading Ajax dbx: " + textStatus + ", " + errorThrown);
+            }
+        }).always(function(){ 
+
+        });
+
+        // Avoid submit event to continue normal execution
+        event.preventDefault();
         return false;
 
     });

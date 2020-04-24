@@ -9,7 +9,7 @@
         
         foreach($modules as $key => $module){
             if(!is_array($module['link'])){
-                $link = base_url($module['link']);
+                $link     = 'class="link" u="'.$module['link'].'"';
             }else{
                 $link = '#';
                 $sm .= '<div class="subMenu" id="m_'.$key.'">';
@@ -21,7 +21,7 @@
             }
 ?>
         <div class="item text-center" sid="m_<?php echo $key; ?>">
-            <a href="<?php echo $link; ?>">
+            <a <?php echo $link; ?>>
                 <i class="material-icons"><?php echo $module['props']->icon; ?></i><br>
                 <span><?php echo $module['props']->title; ?></span>
             </a>

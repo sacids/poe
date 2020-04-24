@@ -17,6 +17,10 @@ class Admin extends MX_Controller{
 
     }
 
+    public function dashboard(){
+        $this->load->view('main');
+    }
+
     public function index(){
 
         $this->model->set_table('modules');
@@ -71,6 +75,12 @@ class Admin extends MX_Controller{
     }
 
 
+    public function dashboard1(){
+
+        $this->module->set_table('entries');
+        //$where  = 
+
+    }
 
 
 }

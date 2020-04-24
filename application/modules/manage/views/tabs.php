@@ -1,5 +1,5 @@
 
-    <div class="row m-4 item_manage">
+    <div class="row m-1 item_manage">
         <div class="col-md-3 p-0 ">
             <div class="item_manage_tabs">
                 <div class="strong p-3 title"><strong><?php echo $row['_title']; ?></strong></div>

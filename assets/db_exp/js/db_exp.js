@@ -49,7 +49,7 @@ function make_table(){
 
 $(document).ready(function() {
 
-    $(document).on('click','.dbx_table td', function(event){
+    $(document).on('click','.dbx_table .eip', function(event){
         var fld_name    = $(this).attr('fld');
         var tbl         = $(this).closest('.dbx_table').attr('t');
         var row_id      = $(this).closest('tr').attr('row_id');

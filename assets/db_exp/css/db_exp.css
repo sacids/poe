@@ -8,6 +8,19 @@ table.dataTable td table.dataTable th{
     padding: 3px 10px;
 }
 
+.dbx_act_link, .dbx_arg_link{
+	cursor: pointer;
+}
+.db_exp_table .dropdown{
+	cursor: pointer;
+}
+.db_exp_table .dropdown-menu {
+	padding: 10px;
+	font-size: 12px;
+}
+.dbx_wrapper .dropdown-menu li:hover{
+	color: darkgreen;
+}
 
 .db_exp_table, table.datatable{
 	font-family: Verdana, sans-serif;
