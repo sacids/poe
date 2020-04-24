@@ -48,12 +48,14 @@ class Screening extends MX_Controller{
     public function domestic($type = 'Local'){
 
         if($this->manage_tbl('entries')) return;
-
-        $data['title']      = ucfirst(strtolower($type)).' Entries Management';
-        $data['description']    = 'Review and update information pertaining to '.ucfirst(strtolower($type)).' travellers';
-        $this->load->view('admin/common/title',$data);
-
         $this->db_exp->set_table('entries');
+
+        if(! (array_key_exists('action',$_GET) && $this->input->get('action') == 'edit')){
+            $data['title']      = ucfirst(strtolower($type)).' Entries Management';
+            $data['description']    = 'Review and update information pertaining to '.ucfirst(strtolower($type)).' travellers';
+            $this->load->view('admin/common/title',$data);
+        }
+
         //$this->db_exp->set_search_condition('form_type = "'.$type.'"');
         $this->db_exp->set_hidden(
             array(
