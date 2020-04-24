@@ -361,19 +361,26 @@ class Entries extends MX_Controller
         $location_id = $postVars['location_origin'];
 
         //location score
-        $location = [];
+        $score = 1;
         if (strtoupper($form_type) == 'INTERNATIONAL') {
             $this->model->set_table('countries');
             $location = $this->model->get($location_id);
+
+            if ($location)
+                $score = $location->score;
+
         } else if (strtoupper($form_type) == 'DOMESTIC') {
             $location = $this->region_model->get($location_id);
+
+            if ($location)
+                $score = $location->score;
         }
 
         //symptoms score
-        $symptoms = $_POST['symptoms'];
+        $symptoms = $postVars['symptoms'];
         $symptoms_score = $this->symptoms_score($symptoms);
 
-        return $location->score + $symptoms_score;
+        return $score + $symptoms_score;
     }
 
     //calculate sum score of threshold

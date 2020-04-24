@@ -49,18 +49,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author        EllisLab Dev Team
  * @property CI_Form_validation $form_validation
  * @property CI_Session $session
- * @property Json_schema $json_schema
- * @property Db_exp $db_exp
  * @property Ion_auth $ion_auth
  * @property CI_Lang $lang
  * @property CI_Config $config
  * @property CI_Input $input
+ * @property CI_Upload $upload
  * @property Model $model
+ * @property Region_model $region_model
+ * @property District_model $district_model
  * @property User_model $user_model
  * @property Group_model $group_model
  * @property Users_group_model $users_group_model
  * @property Symptom_model $symptom_model
- * @property District_model $district_model
+ * @property Entry_model $entry_model
+ * @property Poe_model $poe_model
+ * @property Visited_area_model $visited_area_model
+ * @property Quarantine_model $quarantine_model
+ * @property Supervisor_model $supervisor_model
  * @link        https://codeigniter.com/user_guide/general/controllers.html
  */
 class CI_Controller
