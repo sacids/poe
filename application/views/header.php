@@ -13,7 +13,7 @@
     <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css">
 
     <!-- Global stylesheets -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,500,700,900" rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,100,500,700,900" rel="stylesheet"
           type="text/css">
 
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>">

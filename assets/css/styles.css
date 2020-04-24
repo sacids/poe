@@ -9,9 +9,10 @@ html, body {
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: #424242;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 a {
@@ -306,7 +307,7 @@ Buttons
 ===============================================*/
 .btn {
     border-radius: 0 !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     font-weight: 600;
 }
 
@@ -360,7 +361,7 @@ Forms
 ===============================================*/
 .form-group label {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .form-group span.red {
@@ -369,12 +370,12 @@ Forms
 
 .form-group input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], textarea {
     width: 100%;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .form-group select {
     width: 100%;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .form-group select:focus {

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class Auth extends MX_Controller
 {
     private $data;
 
@@ -22,7 +22,8 @@ class Auth extends CI_Controller
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         } else {
-            redirect('admin', 'refresh');
+            echo 'hello';
+            //redirect('admin', 'refresh');
         }
     }
 
@@ -44,7 +45,7 @@ class Auth extends CI_Controller
                 //if the login is successful
                 //redirect them back to the home page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect('auth/index', 'refresh');
+                redirect('auth', 'refresh');
             } else {
                 // if the login was un-successful
                 // redirect them back to the login page
