@@ -11,8 +11,8 @@
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
+        <h5 class="text-uppercase">Health Surveillance</h5>
+        <p>Port Health surveillance</p>
 
       </div>
       <!-- Grid column -->
@@ -23,17 +23,17 @@
       <div class="col-md-3 mb-md-0 mb-3">
 
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Important Websites</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="#!">Africa CDC</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="#!">WHO</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="#!">Ending Pandemics</a>
           </li>
         </ul>
 
@@ -44,17 +44,17 @@
       <div class="col-md-3 mb-md-0 mb-3">
 
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Important Contacts</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="#!">Ministry of Health</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="#!">National Institute for Medical Research</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="#!">Sokoine University of Agriculture</a>
           </li>
         </ul>
 
@@ -68,8 +68,12 @@
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">acknowledgment:
-    <a href="https://sacids.org"> www.sacids.org</a>
+  <div class="footer-copyright text-center py-3">Acknowledgment:
+    <a href="https://www.moh.or.tz"> www.moh.or.tz</a> |
+    <a href="https://www.nimr.or.tz"> www.nimr.or.tz</a> |
+    <a href="https://www.sua.ac.tz"> www.sua.ac.tz</a> |
+    <a href="https://www.sacids.org"> www.sacids.org</a> |
+    <a href="https://www.sacids.org"> www.skoll.org</a>
   </div>
   <!-- Copyright -->
 
