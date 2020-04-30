@@ -38,18 +38,90 @@ function make_table(){
                 'pdfHtml5'
             ]
         },
-        dom: '<"datatable-header"fB><"datatable-scroll"t><"datatable-footer">',
+        dom: '<"datatable-header"f><"datatable-scroll"t><"datatable-footer">',
         language: {
             search: '<span>Filter:</span> _INPUT_',
             lengthMenu: '<span>Show:</span> _MENU_',
             paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
         }
     });
+
+    $('#eip').on('show.bs.modal', function (event) {
+
+        var modal = $(this);
+        var tr      = $(event.relatedTarget).closest('tr');
+        var id      = $(tr).attr('row_id');
+        modal.find('#ele_id').val(id);
+
+        $(tr).children('.eip').each(function(){
+            var fld_key     = $(this).attr('fld');
+            var fld_val     = $(this).html();
+            modal.find('#'+fld_key).val(fld_val);
+
+            if($('#eip_form #'+fld_key).is('select')){
+                $(this).filter(function(){
+                    return $(this).text() == fld_val;
+                }).prop('selected',true);
+            }else{
+                $('#eip_form #'+fld_key).val(fld_val);
+            }
+        }); 
+    })
+
+    $('#save_eip').on('click', function(e){
+
+        var form = $(this).closest("form");
+        console.log( form.serializeArray() );
+        var action = window.location.origin+'/db_exp/eip';
+
+        var data = new FormData( $(form)[0] );
+
+        var jqXHR = $.ajax({
+            type:"POST",
+            url:action,
+            data:data,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false
+        }).done(function(data){
+            var obj = JSON.parse(data);
+            if(obj.status == 1){
+                $.each(obj, function(key, value){
+                    if(key == 'status') return;
+                    if(key == 'i') return;
+
+                    if($('#eip_form #'+key).is('select')){
+                        var label   = $('#eip_form #'+key).find('option:selected').text();
+                    }else{
+                        var label   = $('#eip_form #'+key).val();
+                    }
+                    $('#'+key+'_'+obj.i).html(label);           
+                });
+            }else{
+                alert('failed');
+            }           
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            target.html('Temporary error, please try again');
+            if ( console && console.log ) {
+                console.log("Loading Ajax dbx: " + textStatus + ", " + errorThrown);
+            }
+        }).always(function(){ 
+            $('#eip').modal('hide'); 
+        });
+
+        // Avoid submit event to continue normal execution
+        event.preventDefault();
+        return false;
+
+    });
+
+
 }
 
 $(document).ready(function() {
 
-    $(document).on('click','.dbx_table .eip', function(event){
+    $(document).on('click','.dbx_table .eip1', function(event){
         var fld_name    = $(this).attr('fld');
         var tbl         = $(this).closest('.dbx_table').attr('t');
         var row_id      = $(this).closest('tr').attr('row_id');
@@ -299,6 +371,20 @@ $(document).ready(function() {
         }
     });
 
+
+    $('#eip').on('show.bs.modal', function (event) {
+
+        alert('tupo');
+        var modal = $(this);
+        $(event.relatedTarget).closest('tr').children('.eip').each(function(){
+
+            
+            var fld_key     = $(this).attr('fld');
+            var fld_val     = $(this).html();
+            alert(fld_val);
+            modal.find('#'+fld_key).val(fld_val);
+        }); 
+      })
 
 
 });

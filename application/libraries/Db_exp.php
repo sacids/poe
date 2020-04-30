@@ -244,6 +244,22 @@ class Db_exp
         $this->fields[$index]['wrp_class']  = $class;
     }
 
+    public function set_edit_in_place($index, $value = false){
+        if (is_array($index)) {
+            foreach ($index as $key => $val) {
+
+                if (is_int($key)) {
+                    // value not set
+                    $this->fields[$val]['eip'] = false;
+                } else {
+                    $this->fields[$key]['eip'] = $val;
+                }
+            }
+        } else {
+            $this->fields[$index]['eip'] = $value;
+        }
+    }
+
     public function set_db_select($index, $table, $val, $label, $condition = false)
     {
         if ($condition) $this->ci->db->where($condition);
@@ -704,7 +720,7 @@ class Db_exp
 
                 $row    = $t_array[$name]['array'];
                 $index  = $t_array[$name]['index'];
-                $this->_edit_field($row,$val);
+                $this->_edit_field($row,$val,$this->output);
 
                 // remove item from form array
                 unset($form_array[$index]);
@@ -721,7 +737,7 @@ class Db_exp
 
             //$this->output .= $fn; print_r($val); $this->output .= "\n";
 
-            $this->_edit_field($row, $val);
+            $this->_edit_field($row, $val,$this->output);
 
         }
 
@@ -759,7 +775,270 @@ class Db_exp
         return $val;
     }
 
-    private function _edit_field($field, $value)
+    private function _edit_field($field, $value, &$obj)
+    {
+        
+
+        $type   = array_key_exists('Type',$field) ? $field['Type'] : $field['type'];
+        $name   = array_key_exists('Field',$field) ? $field ['Field'] : $field['name'];
+        $key    = array_key_exists('Key',$field) ? $field ['Key'] : $field['primary_key'];
+        $label  = array_key_exists('label',$field) ? $field ['label'] : ucfirst(str_replace("_", " ", str_ireplace("_id", "", $name)));
+
+        //$label = ucfirst(str_replace("_", " ", str_ireplace("_id", "", $name)));
+
+        // check if its primary key
+        //if ($field ['Key'] === 'PRI' && $value == '') {
+        if ($key === 'PRI') {
+            $this->set_validation('id','required');
+            
+            return;
+        }
+
+        $data = array();
+        $data['name'] = $name;
+        $data['id'] = $name;
+        $data['class'] = 'validate form-control ';
+        // set maxlength attribute
+        if($maxlength = $this->_get_maxlength($type)) $data['maxlength'] = $maxlength;
+
+        // check validation
+        if(array_key_exists($name,$this->fields) && array_key_exists('validation',$this->fields[$name])){
+            // explode validation
+            //echo $this->fields[$name]['validation'];
+            $tmp    = explode('|',$this->fields[$name]['validation']);
+            foreach($tmp as $v1){
+                $v1 = trim($v1);
+                if(substr($v1,0,10) == 'max_length'){
+                    $datalength = substr($v1,11,-1);
+                    $data['data-length']    = $datalength;
+                    $data['class']  .= ' data-length ';
+                }
+            }
+        };
+
+        // check css class
+        $wrp_class  = '';
+        if(array_key_exists($name,$this->fields) && array_key_exists('wrp_class',$this->fields[$name])){
+
+            $wrp_class  = $this->fields[$name]['wrp_class'];
+        }
+
+        $options = false;
+
+        if (array_key_exists($name, $this->fields)) {
+
+            foreach ($this->fields[$name] as $key => $val) {
+
+                switch ($key) {
+                    case 'label':
+                        //$type	= 'label';
+                        $label = $val;
+                        break;
+                    case 'db_select':
+                        $type = 'db_select';
+                        $options = $val;
+                        break;
+                    case 'select':
+                        $type = 'select';
+                        $options = $val;
+                        break;
+                    case 'upload':
+                        $type = 'upload';
+                        $options = $val;
+                        break;
+                    case 'json':
+                        //$this->output .= $value;
+                        $type = 'json';
+                        $json_data = json_decode($value, true);
+                        $json_keys = $this->fields[$name]['json'];
+                        //print_r($json_keys);
+                        foreach ($json_keys as $fk) {
+
+                            $fn = array('Field' => $fk, 'Type' => '', 'Key' => '');
+                            $fv = '';
+                            if (is_array($json_data) && array_key_exists($fk, $json_data)) $fv = $json_data[$fk];
+                            $this->_edit_field($fn, $fv,$obj);
+                        }
+                        break;
+                    case 'multiselect':
+                        $type = 'multiselect';
+                        $options = $val;
+                        break;
+                    case 'list':
+                        $type = 'list';
+                        $options = $val;
+                        break;
+                    case 'textarea':
+                        $type = 'textarea';
+                        break;
+                    case 'password':
+                        $type = 'password';
+                        break;
+                    case 'password_dblcheck':
+                        $type = 'password_dblcheck';
+                        break;
+                    case 'hidden':
+                        $type = 'hidden';
+                        if ($val != '') $value = $val;
+                        break;
+                    case 'date':
+                        $type = 'date';
+                        //$data['data-inputmask'] = "'mask': '99/99/9999'";
+                        break;
+                    case 'time':
+                        $type = 'time';
+                        break;
+                    case 'view';
+                        $type = 'view';
+                        break;
+                    case 'formula':
+                        $type = 'formula';
+                        break;
+                    case 'service':
+                        $type = 'service';
+                        break;
+                }
+
+                //$data['class'] = ' db_exp_' . $type;
+            }
+        }
+        // print_r ( $field );
+
+        $label_class    = '';
+        if(!is_array($value)){
+            if($value != '') $label_class = 'active';
+        }
+        $pre = '<div class="form-group '.$wrp_class.' col"><label>'.$label.'</label>';
+        $end =  '</div>';
+
+        switch ($type) {
+
+
+            case 'int' :
+                $obj .= $pre . form_input($data, $value) . $end;
+                break;
+            case 'upload':
+                //print_r($data);$this->output .= 'upload';
+                if(!empty($value)){
+                    $replace = '<span class="db_exp_replace_upload_str"> Replace '.$value.'</span>';
+                }else{
+                    $replace = '';
+                }
+                $obj .= $pre . form_upload($data,$value) .$replace. $end;
+                $obj .= form_hidden($name.'_orig', $value);
+                break;
+            case 'password' :
+                $obj .= $pre . form_password($data, $value) . $end;
+                break;
+            case 'password_dblcheck' :
+                $obj .= $pre . form_password($data, $value) . $end;
+                $data['name'] = $data['name'] . '_repeat';
+                $pre = '<div class="element">Repeat ' . $label . '</div>';
+                $obj .= $pre . form_password($data, $value) . $end;
+                break;
+            case 'textarea':
+                $data['cols'] = 80;
+                $data['rows'] = 4;
+                $data['class'] .= " materialize-textarea ";
+                $obj .= $pre . form_textarea($data, $value) . $end;
+                //$this->output .= '<script> CKEDITOR.replace('.$data['id'].')</script>';
+                break;
+            case 'date':
+                $data['type']   = 'text';
+                $data['class']  .= ' pickadate ';
+                $obj .= $pre. form_input($data,$value) . $end;
+                break;
+            case 'time':
+                $data['type']   = 'text';
+                $data['class']  .= ' pickatime ';
+                $obj .= $pre. form_input($data,$value) . $end;
+                break;
+            case 'db_select':
+            case 'select':
+                $obj .= $pre.'<div class="multiselect-native-select"><select class="form-control multiselect" ';
+                foreach($data as $k1 => $v1){
+                    $obj .= $k1.'="'.$v1.'"';
+                }
+                $obj .= '>';
+                foreach($options as $k1 => $v1){
+                    $selected   = (($k1 == $value) ? 'selected' : '');
+                    $obj .= '<option value="'.$k1.'" '.$selected.'>'.$v1.'</option>';
+                }
+                $obj .= '</select></div>'.$end;
+                break;
+            case 'list':
+                $data['name'] = $name . '[]';
+                $obj .= $pre.'<select class="form-control duallistbox" multiple="multiple" ';
+                //foreach($data as $k1 => $v1){
+                //    $this->output .= $k1.'="'.$v1.'" ';
+                //}
+                
+                $obj .= ' data-fouc>';
+                $saved_value    = is_array($value) ? implode(",",$value) : '';
+                foreach($options as $k1 => $v1){
+                    $selected   = ((is_array($saved_value) && in_array($k1,$saved_value)) ? 'selected' : '');
+                    $obj .= '<option value="'.$k1.'" '.$selected.'>'.$v1.'</option>';
+                }
+                $obj .= '</select>'.$end;
+                break;
+            case 'multiselect':
+                $data['name'] = $name . '[]';
+                $obj .= $pre.'<div class="multiselect-native-select"><select class="form-control multiselect" multiple="multiple" ';
+                foreach($data as $k1 => $v1){
+                    $obj .= $k1.'="'.$v1.'" ';
+                }
+                
+                $obj .= '>';
+                $saved_value    = is_array($value) ? implode(",",$value) : '';
+                foreach($options as $k1 => $v1){
+                    $selected   = ((is_array($saved_value) && in_array($k1,$saved_value)) ? 'selected' : '');
+                    $obj .= '<option value="'.$k1.'" '.$selected.'>'.$v1.'</option>';
+                }
+                $obj .= '</select></div>'.$end;
+                break;
+            case 'json':
+            case 'hidden':
+                $obj .= form_hidden($name, $value);
+                break;
+            case 'view':
+                if (array_key_exists('hidden', $this->fields[$name])) {
+                    $obj .= form_hidden($name, $value);
+                } else {
+                    $s = '';
+
+                    if (is_array($options)) {
+                        if (is_array($value)) {
+                            $v = $value;
+                        } else {
+                            $v = explode(',', $value);
+                        }
+
+                        foreach ($v as $kk) {
+                            if($kk == '') $s .= '';
+                            else $s .= $options[trim($kk)] . ',';
+                        }
+                    } else {
+                        $s = $value;
+                    }
+                    //$this->output .= $pre_view . $s . $end;
+                    $obj .= $pre.'<input disabled value="'.$s.'" id="'.$name.'" type="text" class="form-control validate">'.$end;
+                }
+                break;
+            case 'formula':
+                $obj .= $pre . $value . $end;
+                break;
+            case 'service':
+                //$this->output .= $pre . $value . $end;
+                $obj .= $pre.'<input disabled value="'.$value.'" id="'.$name.'" type="text" class="form-control validate">'.$end;
+                break;
+            default :
+                $data['placeholder']    = $value;
+                $obj .= $pre . form_input($data,$value) . $end;
+                break;
+        }
+    }
+
+    private function _edit_field2($field, $value)
     {
         
 
@@ -890,7 +1169,7 @@ class Db_exp
         if(!is_array($value)){
             if($value != '') $label_class = 'active';
         }
-        $pre = '<div class="form-group '.$wrp_class.'"><label>'.$label.'</label>';
+        $pre = '<div class="form-group '.$wrp_class.' col"><label>'.$label.'</label>';
         $end =  '</div>';
 
         switch ($type) {
@@ -1003,7 +1282,7 @@ class Db_exp
                         $s = $value;
                     }
                     //$this->output .= $pre_view . $s . $end;
-                    $this->output .= $pre.'<input disabled value="'.$s.'" id="'.$name.'" type="text" class="validate">'.$end;
+                    $this->output .= $pre.'<input disabled value="'.$s.'" id="'.$name.'" type="text" class="form-control validate">'.$end;
                 }
                 break;
             case 'formula':
@@ -1011,7 +1290,7 @@ class Db_exp
                 break;
             case 'service':
                 //$this->output .= $pre . $value . $end;
-                $this->output .= $pre.'<input disabled value="'.$value.'" id="'.$name.'" type="text" class="validate">'.$end;
+                $this->output .= $pre.'<input disabled value="'.$value.'" id="'.$name.'" type="text" class="form-control validate">'.$end;
                 break;
             default :
                 $data['placeholder']    = $value;
@@ -1020,14 +1299,141 @@ class Db_exp
         }
     }
 
+    private function _listo_header(){
+
+        $list =  '<div class="d-flex flex-row-reverse bd-highlight mb-3">';
+        $list .= '<div class="border mx-1 clearfix px-3 py-2">
+                    <div class="material-icons mr-1 float-left" style="padding-top: 1px">format_align_justify</div> 
+                    <div class="float-left">List</div>
+                </div>';
+        $list .= '<div class="border mx-1 clearfix px-3 py-2">
+                    <div class="material-icons mr-1 float-left" style="padding-top: 1px">post_add</div> 
+                    <div class="float-left">Insert</div>
+                </div>';
+        $list .= '<div class="border mx-1 clearfix px-3 py-2">
+                    <div class="material-icons mr-1 float-left" style="padding-top: 1px">check_box_outline_blank</div> 
+                    <div class="float-left">Toggle</div>
+                </div>';
+        $list .= '<div class="border mx-1 clearfix px-3 py-2">
+                    <div class="material-icons mr-1 float-left style="padding-top: 2px"">search</div> 
+                    <div class="float-left">Adv Search</div>
+                </div>';
+        $list .= '<div class="border mx-1 clearfix px-2 py-2">
+                    <div class="material-icons mr-1 float-left style="padding-top: 2px"">filter_list</div> 
+                    <input type="text" class="border-0 bg-light float-left" />
+                </div>';
+        $list .= '</div/>';
+
+        $modal = '<!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group  col">
+                    <label>Hotel</label>
+                    <input value="Holiday Inn" id="hotel" type="text" class="form-control validate">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>';
+
+        return $modal;
+
+        //return $list;
+
+    }
+
+    private function _listo_eip($meta_data){
+
+        $adv_search     = '';
+        $edit_in_place  = '';
+
+        //print_r($meta_data);
+        foreach($meta_data as $field){
+
+            $name   = $field['name'];
+            if(array_key_exists($name,$this->fields) && array_key_exists('eip',$this->fields[$name])){
+                $this->_edit_field($field,'',$edit_in_place);
+            }
+            $this->_edit_field($field,'',$adv_search);
+        }
+
+
+        $adv_s = '<!-- Modal -->
+        <div class="modal fade" id="adv_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="adv_search_title">Advanced Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                '.form_open_multipart($this->form_action).'
+                '.$adv_search.'
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>';
+
+        $eip = '<!-- Modal -->
+        <div class="modal fade" id="eip" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <form name="eip_form" id="eip_form">
+              <div class="modal-header">
+                <h5 class="modal-title" id="eip_title">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                '.$edit_in_place.'
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_eip">Save changes</button>
+                <input type="hidden"  name="i" id="ele_id" value="">
+                <input type="hidden"  name="t" value="'.base64_encode($this->table).'">
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>';
+
+        return $eip.$adv_s;
+
+    }
+
     private function _render_listo(){
 
-        $CI = &get_instance();
+        $CI             = &get_instance();
         //$uri = uri_string().'?'.$_SERVER['QUERY_STRING'];
 
 
-        $fields = $CI->db->list_fields($this->table);
-        $show = array();
+        $fields         = $CI->db->list_fields($this->table);
+        $show           = array();
+        $edit_in_place  = array();
+        
+        //print_r($this->fields);
+
         foreach ($fields as $field) {
             if (array_key_exists($field, $this->fields) && is_array($this->fields[$field]) && array_key_exists('hidden', $this->fields[$field])) {
 
@@ -1035,6 +1441,8 @@ class Db_exp
                 array_push($show, $field);
             }
         }
+
+        log_message('DEBUG',json_encode($edit_in_place));
         if (sizeof($show) != 0) {
             $CI->db->select(implode(",", $show));
         }
@@ -1045,25 +1453,36 @@ class Db_exp
         } else {
             $query = $CI->db->get($this->table);
         }
-
         
         $this->output   = '<div class="table-responsive"><table class="table table-bordered1 table-striped dbx_table compact stripe" action="'.$this->form_action.'" t="'.base64_encode($this->table).'">';
 
         // set the header
         
+        $meta_data      = array(); // storing modal data
         $this->output   .= '<thead><tr class="">';
         $this->output   .= '<th>#</th><th><span class="material-icons">settings_applications</span></th>';
-        foreach ($query->list_fields() as $field){
+        foreach ($query->field_data() as $d_field){
+
+            $field      = $d_field->name;
 
             if(array_key_exists($field,$this->fields) && array_key_exists('label',$this->fields[$field])){
                 $field = $this->fields[$field]['label'];
             }
 
             if ($field === 'id') continue;
+
             $label = ucfirst(str_replace("_", " ", str_ireplace("_id", "", $field)));
+
+            $d_field            =(array) $d_field;
+            $d_field['label']   = $label;
+            array_push($meta_data, $d_field);
+
             $this->output   .= '<th>'.$label.'</th>';
         }
         $this->output   .= '</tr></thead>';
+
+
+        //echo '<pre>'; print_r($meta_data); echo '</pre>';
 
         $this->output   .= '<tbody>';
 
@@ -1095,13 +1514,27 @@ class Db_exp
             foreach ($row as $key => $val) {
 
                 if ($key === 'id') continue;
-                $this->output   .= '<td id="'.$key.'_'.$row['id'].'" fld="'.$key.'" class="eip">'.$this->display_field($key, $val).'</td>';
+                
+                $wrp_class  = ''; $eip = '';
+                if(array_key_exists($key,$this->fields) && array_key_exists('wrp_class',$this->fields[$key])){
+                    $wrp_class  = $this->fields[$key]['wrp_class'];
+                }
+                if(array_key_exists($key,$this->fields) && array_key_exists('eip',$this->fields[$key])){
+                    $eip        =  ' data-toggle="modal" data-target="#eip" ';
+                    $wrp_class  .= " eip ";
+                }
+
+                
+                $this->output   .= '<td id="'.$key.'_'.$row['id'].'" fld="'.$key.'" class="'.$wrp_class.'"  '.$eip.'>'.$this->display_field($key, $val).'</td>';
 
             }
             $this->output   .= '</tr>';
 
         }
         $this->output   .= '</tbody></table></div>';
+
+        
+        $this->output   .= $this->_listo_eip($meta_data);
 
         if($this->show_insert_button){
 
