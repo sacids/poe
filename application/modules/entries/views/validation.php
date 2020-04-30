@@ -203,15 +203,15 @@
             }
 
             //validate employment
-            if (employment === "") {
-                printError("errorEmployment", "<?php echo $this->lang->line('required_employment')?>")
-            } else {
-                printError("errorEmployment", "");
-                errorEmployment = false;
-            }
+//            if (employment === "") {
+//                printError("errorEmployment", "<?php //echo $this->lang->line('required_employment')?>//")
+//            } else {
+//                printError("errorEmployment", "");
+//                errorEmployment = false;
+//            }
 
             //check all data in tab one
-            if ((errorEmployment || errorStayDuration) === true) {
+            if ((errorStayDuration) === true) {
                 return false;
             }
             return true;
@@ -263,7 +263,7 @@
 
             //tab 3 validation
         } else if (currentTab === 3) {
-            let errorCountryOrigin = true;
+            let errorCountryOrigin = errorDate = errorDays = true;
 
             if (countryOrigin === "") {
                 printError("errorCountryOrigin", "<?php echo $this->lang->line('required_country_journey_started');?>");
@@ -271,14 +271,6 @@
                 printError("errorCountryOrigin", "");
                 errorCountryOrigin = false;
             }
-
-            //check all data in tab 3
-            if ((errorCountryOrigin) === true) {
-                return false;
-            }
-            return true;
-        } else if (currentTab === 4) {
-            let errorDate = errorDays = true;
 
             //date
             if (date.length > 0) {
@@ -318,16 +310,16 @@
             }
 
             //check all data in tab 3
-            if ((errorDate || errorDays) === true) {
+            if ((errorCountryOrigin || errorDate || errorDays) === true) {
                 return false;
             }
 
             return true;
+        } else if (currentTab === 4) {
+            return true;
         } else if (currentTab === 5) {
             return true;
         } else if (currentTab === 6) {
-            return true;
-        } else if (currentTab === 7) {
             let errorSymptoms = true;
 
             for (let i = 0; i < symptoms.length; i++) {

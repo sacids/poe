@@ -19,18 +19,24 @@
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
     <!-- /global stylesheets -->
 
+    <!-- Bootstrap date picker CSS -->
+    <link href="<?= base_url('assets/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') ?>" rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/styles.css') ?>" rel="stylesheet">
 
-
     <!-- Core JS files -->
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <!-- <script src="<?= base_url('assets/js/jquery-3.3.1.slim.min.js') ?>"></script> -->
     <script src="<?= base_url('assets/js/popper.min.js') ?>"></script>
 
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/custom.js') ?>"></script>
     <!-- /core JS files -->
+
+    <!-- Bootstrap date picker JS -->
+    <script src="<?= base_url('assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
 </head>
 
 <body>

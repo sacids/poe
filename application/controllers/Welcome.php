@@ -26,6 +26,7 @@ class Welcome extends CI_Controller
     }
 
 
+    //get districts
     function get_districts($region_id)
     {
         log_message("DEBUG", "REACHES HERE");
@@ -37,6 +38,24 @@ class Welcome extends CI_Controller
             echo '<option value="">' . $this->lang->line('lbl_select') . '</option>';
             foreach ($districts as $value) {
                 echo '<option value="' . $value->id . '" ' . set_value("district_id") . '>' . $value->name . '</option>';
+            }
+        } else {
+            echo '<option value="">' . $this->lang->line('lbl_select') . '</option>';
+        }
+    }
+
+    //get point of entries
+    function get_poe($transport_means)
+    {
+        log_message("DEBUG", "REACHES HERE");
+        log_message("DEBUG", "transport_means => " . $transport_means);
+
+        $entries = $this->poe_model->get_many_by(['transport_means' => strtolower($transport_means)]);
+
+        if ($entries) {
+            echo '<option value="">' . $this->lang->line('lbl_select') . '</option>';
+            foreach ($entries as $value) {
+                echo '<option value="' . $value->id . '" ' . set_value("point_of_entry") . '>' . $value->name . '</option>';
             }
         } else {
             echo '<option value="">' . $this->lang->line('lbl_select') . '</option>';
