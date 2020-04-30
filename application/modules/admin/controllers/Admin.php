@@ -37,10 +37,14 @@ class Admin extends MX_Controller{
         }
 
         $data['modules']    = $holder;
-        
+
+        //international
+        $this->data['international'] = $this->entry_model->count_many_by(['form_type' => 'INTERNATIONAL']);
+        $this->data['domestic'] = $this->entry_model->count_many_by(['form_type' => 'DOMESTIC']);
+
         
         //echo '<pre>'; print_r($data); echo '</pre>';exit();
-        $this->load->view('common/head');
+        $this->load->view('common/head', $this->data);
         $this->load->view('common/sidebar',$data);
         $this->load->view('common/header');
         $this->load->view('main');
