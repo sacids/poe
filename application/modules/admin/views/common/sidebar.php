@@ -1,5 +1,4 @@
 <div class="sidebar">
-
     <div class="logo text-center">
         <img src="<?php echo base_url('assets/admin/images/logo.png'); ?>" class="court" style="width: 55px;">
     </div>

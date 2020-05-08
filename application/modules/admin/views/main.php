@@ -1,288 +1,317 @@
-
-
 <div class="content" id="content">
-    <div class="row dashboard">
-        <div class="col-12 col-md-3 p-2">
-            <div class="stat_today border p-3" style="background-color: #ec407a;height: 10rem;">
-                <span class="date">TODAY</span>
-                <span class="total">300</span>
-                <span class="screen">30</span>
-                <span class="">visitors</span>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <?= form_open(uri_string(), 'method="POST"'); ?>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <?php
+                            $_option = ['' => '-- Select --', 'today' => 'Today', 'yesterday' => 'Yesterday', 'week' => 'Last week', 'month' => 'Last month', 'overall' => 'Overall'];
+                            echo form_dropdown('days', $_option, set_value('days'), 'class="form-control"'); ?>
+                        </div> <!-- /form-group -->
+                    </div><!--./col-lg-4 -->
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" name="filter" class="btn btn-secondary">
+                                <i class="fa fa-search"></i> Filter
+                            </button>
+                        </div> <!-- /form-group -->
+                    </div><!--./col-lg-4 -->
+                </div><!--./row -->
+                <?= form_close() ?>
             </div>
         </div>
-        <div class="col-12 col-md-3 p-2">
-            <div class="stat_today border p-3" style="background-color: #29b6f6;height: 10rem;">
-                <span class="date">YESTERDAY</span>
-                <span class="total">300</span>
-                <span class="screen">30</span>
-                <span class="">visitors</span>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 p-2">
-            <div class="stat_today border p-3" style="background-color: #26a69a;height: 10rem;">
-                <span class="date">LAST WEEK</span>
-                <span class="total">300</span>
-                <span class="screen">30</span>
-                <span class="">visitors</span>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 p-2">
-            <div class="stat_today border p-3" style="background-color: #ff7043;height: 10rem;">
-                <span class="date">LAST MONTH</span>
-                <span class="total">300</span>
-                <span class="screen">30</span>
-                <span class="">visitors</span>
-            </div>
-        </div>
-    </div>
+    </div><!--./row -->
 
     <div class="row">
+        <div class="col-lg-3 col-md-2">
+            <div class="card bg-primary-200">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-reg-users"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">
+                                Total Passengers
+                            </div>
+                            <br/>
+                            <div class="text-large">
+                                <?= (isset($total_passengers) ? number_format($total_passengers) : '') ?>
+                            </div>
+                        </div><!--./col-xs-9 -->
+                    </div>
+                </div>
+            </div>
+        </div><!--./col-md-3 -->
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	<script>
-		'use strict';
+        <div class="col-lg-3 col-md-3">
+            <div class="card bg-secondary-200">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-couple-users"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">
+                                Male: <?= calc_percentage($male, $total_passengers) ?>%
+                            </div>
+                            <br/>
+                            <div class="text-medium">
+                                Female: <?= calc_percentage($female, $total_passengers) ?>%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--./col-md-3 -->
 
-window.chartColors = {
-	red: 'rgb(255, 99, 132)',
-	orange: 'rgb(255, 159, 64)',
-	yellow: 'rgb(255, 205, 86)',
-	green: 'rgb(75, 192, 192)',
-	blue: 'rgb(54, 162, 235)',
-	purple: 'rgb(153, 102, 255)',
-	grey: 'rgb(201, 203, 207)'
-};
+        <div class="col-lg-3 col-md-3">
+            <div class="card bg-danger">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-above-temp"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">Above Temp</div>
+                            <div class="text-large"><?= number_format(count($total_above_temp)) ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--./col-md-3 -->
 
-(function(global) {
-	var MONTHS = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-	];
+        <div class="col-lg-3 col-md-3">
+            <div class="card bg-success">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-normal-temp"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">Normal Temp</div>
+                            <div class="text-large"><?= number_format(count($total_normal_temp)) ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--./col-md-3 -->
+    </div><!--./row -->
 
-	var COLORS = [
-		'#4dc9f6',
-		'#f67019',
-		'#f53794',
-		'#537bc4',
-		'#acc236',
-		'#166a8f',
-		'#00a950',
-		'#58595b',
-		'#8549ba'
-	];
+    <div class="row mt-4 mb-4">
+        <div class="col-md-9 col-12">
+            <div class="card card-flat bg-graph p-2">
+                <div class="card-heading">
+                    <b class="text-uppercase">Registered Passengers per POE</b>
+                </div>
+                <div class="card-body">
+                    <div id="registered-passengers" style="height: 350px; width: 100%;"></div>
+                </div>
+            </div><!--./card-->
+        </div><!--./col-md-6 -->
 
-	var Samples = global.Samples || (global.Samples = {});
-	var Color = global.Color;
+        <div class="col-md-3 col-12">
+            <div class="card card-flat bg-graph p-2">
+                <div class="card-heading">
+                    <b class="text-uppercase">Actions</b>
+                </div>
 
-	Samples.utils = {
-		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
-		srand: function(seed) {
-			this._seed = seed;
-		},
+                <div class="card-body">
+                    <div class="info" style="height: 350px; width: 100%;">
+                        <p>Number of Flight
+                            <span>5</span>
+                        </p>
 
-		rand: function(min, max) {
-			var seed = this._seed;
-			min = min === undefined ? 0 : min;
-			max = max === undefined ? 1 : max;
-			this._seed = (seed * 9301 + 49297) % 233280;
-			return min + (this._seed / 233280) * (max - min);
-		},
+                        <p>International Passengers
+                            <span>200</span>
+                        </p>
 
-		numbers: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 1;
-			var from = cfg.from || [];
-			var count = cfg.count || 8;
-			var decimals = cfg.decimals || 8;
-			var continuity = cfg.continuity || 1;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var data = [];
-			var i, value;
+                        <p>Domestic Passengers
+                            <span>100</span>
+                        </p>
 
-			for (i = 0; i < count; ++i) {
-				value = (from[i] || 0) + this.rand(min, max);
-				if (this.rand() <= continuity) {
-					data.push(Math.round(dfactor * value) / dfactor);
-				} else {
-					data.push(null);
-				}
-			}
+                        <p>Going to secondary screening
+                            <span>240</span>
+                        </p>
 
-			return data;
-		},
+                        <p>Allowed to Proceed
+                            <span>255</span>
+                        </p>
+                    </div><!--stats -->
+                </div>
+            </div><!--./card-->
+        </div><!--./col-md-3 -->
+    </div><!--./row -->
 
-		labels: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 100;
-			var count = cfg.count || 8;
-			var step = (max - min) / count;
-			var decimals = cfg.decimals || 8;
-			var dfactor = Math.pow(10, decimals) || 0;
-			var prefix = cfg.prefix || '';
-			var values = [];
-			var i;
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12 col-12">
+            <div class="card card-flat bg-graph p-2">
+                <div class="card-heading">
+                    <b class="text-uppercase">Reported symptoms</b>
+                </div>
+                <div class="card-body">
+                    <div id="reported-symptoms" style="height: 400px; width: 100%;"></div>
+                </div>
+            </div><!--./card-->
+        </div><!--./col-md-6 -->
+    </div><!--./row -->
 
-			for (i = min; i < max; i += step) {
-				values.push(prefix + Math.round(dfactor * i) / dfactor);
-			}
+</div><!--./content -->
 
-			return values;
-		},
+<script type="text/javascript">
+    //Registered Passengers
+    $(function () {
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            }
+        });
 
-		months: function(config) {
-			var cfg = config || {};
-			var count = cfg.count || 12;
-			var section = cfg.section;
-			var values = [];
-			var i, value;
+        $('#registered-passengers').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#fafafa'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: <?= (isset($poe_array) ? $poe_array : '') ?>,
+                    crosshair: true
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:,.0f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        minPointLength: 3,
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                fontSize: '8px'
+                            }
+                        }
+                    },
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    //todo: prompt link to a specific poe
 
-			for (i = 0; i < count; ++i) {
-				value = MONTHS[Math.ceil(i) % 12];
-				values.push(value.substring(0, section));
-			}
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [
+                    {
+                        showInLegend: false,
+                        name: 'Passengers',
+                        color: '#1565c0',
+                        data: <?= (isset($passengers_array) ? $passengers_array : '')?>
+                    }
+                ],
+                credits: {
+                    enabled: false
+                }
+            }
+        );
+    });
 
-			return values;
-		},
 
-		color: function(index) {
-			return COLORS[index % COLORS.length];
-		},
+    //reported-symptoms
+    $(function () {
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            }
+        });
 
-		transparentize: function(color, opacity) {
-			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
-			return Color(color).alpha(alpha).rgbString();
-		}
-	};
+        $('#reported-symptoms').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#fafafa'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: <?= (isset($symptoms_array) ? $symptoms_array : '') ?>,
+                    crosshair: true
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:,.0f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        minPointLength: 3,
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                fontSize: '8px'
+                            }
+                        }
+                    },
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    //todo: prompt link to a specific poe
 
-	// DEPRECATED
-	window.randomScalingFactor = function() {
-		return Math.round(Samples.utils.rand(-100, 100));
-	};
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [
+                    {
+                        showInLegend: false,
+                        name: 'Reported symptoms',
+                        color: '#B71C1C',
+                        data: <?= (isset($symptom_occurrences_array) ? $symptom_occurrences_array : '')?>
+                    }
+                ],
+                credits: {
+                    enabled: false
+                }
+            }
+        );
+    });
+</script>
 
-	// INITIALIZATION
 
-	Samples.utils.srand(Date.now());
 
-	// Google Analytics
-	/* eslint-disable */
-	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-28909194-3', 'auto');
-		ga('send', 'pageview');
-	}
-	/* eslint-enable */
-
-}(this));
-	</script>
-	<style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-	</style>
-	<div style="width: 80%;">
-		<canvas id="canvas"></canvas>
-	</div>
-	<button id="randomizeData" class="btn">Randomize Data</button>
-	<script>
-		var barChartData = {
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-			datasets: [{
-				label: 'Dataset 1',
-				backgroundColor: window.chartColors.red,
-				stack: 'Stack 0',
-				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
-				]
-			}, {
-				label: 'Dataset 2',
-				backgroundColor: window.chartColors.blue,
-				stack: 'Stack 0',
-				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
-				]
-			}, {
-				label: 'Dataset 3',
-				backgroundColor: window.chartColors.green,
-				stack: 'Stack 1',
-				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
-				]
-			}]
-
-		};
-		window.onload = function() {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myBar = new Chart(ctx, {
-				type: 'bar',
-				data: barChartData,
-				options: {
-					title: {
-						display: true,
-						text: 'Chart.js Bar Chart - Stacked'
-					},
-					tooltips: {
-						mode: 'index',
-						intersect: false
-					},
-					responsive: true,
-					scales: {
-						xAxes: [{
-							stacked: true,
-						}],
-						yAxes: [{
-							stacked: true
-						}]
-					}
-				}
-			});
-		};
-
-		document.getElementById('randomizeData').addEventListener('click', function() {
-			barChartData.datasets.forEach(function(dataset) {
-				dataset.data = dataset.data.map(function() {
-					return randomScalingFactor();
-				});
-			});
-			window.myBar.update();
-		});
-	</script>
-
-    </div>
-</div>
 
 
 

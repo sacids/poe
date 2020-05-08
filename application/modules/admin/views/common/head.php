@@ -14,5 +14,11 @@
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,100,500,700,900" rel="stylesheet"
           type="text/css">
+
+    <?php $this->load->view('common/js'); ?>
+
+    <!--highcharts -->
+    <script src="<?= base_url('assets/js/highcharts.js') ?>"></script>
+
 </head>
 <body>

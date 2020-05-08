@@ -54,3 +54,24 @@ if (!function_exists('get_current_user_name')) {
     }
 }
 
+//show percentage
+if (!function_exists('calc_percentage')) {
+    function calc_percentage($num, $total)
+    {
+        $percent = 0;
+        if ($total > 0) {
+            $percent = ($num / $total) * 100;
+
+            if ($percent > 0) {
+                if ($percent > 100)
+                    return 100;
+                else
+                    return round($percent, 1);
+            } else {
+                return $percent;
+            }
+        } else {
+            return $percent;
+        }
+    }
+}
