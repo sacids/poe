@@ -228,12 +228,12 @@ footer a:link {
 }
 
 .text-medium {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
 .text-small {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
 }
 
@@ -308,6 +308,11 @@ background colors
 }
 
 .bg-danger {
+    background-color: #D32F2F;
+    color: #ffffff;
+}
+
+.bg-danger-100 {
     background-color: #d9534f;
     color: #ffffff;
 }

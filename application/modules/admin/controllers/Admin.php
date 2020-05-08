@@ -51,63 +51,146 @@ class Admin extends MX_Controller
         $symptoms_array = [];
         $symptom_occurrences_array = [];
 
-        //total no of passenger
-        $this->data['total_passengers'] = $this->entry_model->count_all();
+        //if post filter
+        if (isset($_POST['filter'])) {
+            $day = $this->input->post('day');
 
-        //male and female
-        $male = 0;
-        $female = 0;
-        $all_passengers = $this->entry_model->get_total_by_gender();
-        if ($all_passengers) {
-            if (isset($all_passengers[0]))
-                $male = $all_passengers[0]->passengers;
+            $where = [];
+            if ($day == 'today')
+                $where = ['DATE(created_at)' => date('Y-m-d')];
+            else if ($day == 'yesterday')
+                $where = ['DATE(created_at)' => date('Y-m-d', strtotime('-1 day'))];
 
-            if (isset($all_passengers[1]))
-                $female = $all_passengers[1]->passengers;
-        }
+            //total no of passenger
+            $this->data['total_passengers'] = $this->entry_model->count_many_by($where);
 
-        $this->data['male'] = $male;
-        $this->data['female'] = $female;
+            //male and female
+            $male = 0;
+            $female = 0;
+            $all_passengers = $this->entry_model->get_total_by_gender($where);
+            if ($all_passengers) {
+                if (isset($all_passengers[0]))
+                    $male = $all_passengers[0]->passengers;
 
-        //above temperature
-        $this->data['total_above_temp'] = $this->entry_model->get_many_by(['temperature >=' => 38]);
-
-        //normal temperature
-        $this->data['total_normal_temp'] = $this->entry_model->get_many_by(['temperature >=' => 35, 'temperature < ' => 38]);
-
-        //point of entries
-        $poe = $this->poe_model->get_all();
-        foreach ($poe as $value) {
-            //json data creation
-            $poe_array[] = $value->name;
-
-            //passenger per poe
-            $passengers = $this->entry_model->count_many_by(['point_of_entry' => $value->id]);
-            $passengers_array[] = (int)$passengers;
-        }
-
-        //reported symptoms
-        $symptoms = $this->symptom_model->get_many_by(['id !=' => 1000]);
-
-        //entries
-        $entries = $this->entry_model->get_all();
-
-        foreach ($symptoms as $value) {
-            $symptoms_array[] = $value->name;
-
-            //select from poe
-            $i = 0;
-            foreach ($entries as $entry) {
-                $st = explode(',', $entry->symptoms);
-
-                if (in_array($value->id, $st))
-                    $i++;
+                if (isset($all_passengers[1]))
+                    $female = $all_passengers[1]->passengers;
             }
 
-            //number of symptoms
-            $symptom_occurrences_array[] = (int)$i;
-        }
+            $this->data['male'] = $male;
+            $this->data['female'] = $female;
 
+            //total_male_female
+            $this->data['total_male_female'] = $male + $female;
+
+            //above temperature
+            $ab_where = ['temperature >=' => 38] + $where;
+            $this->data['total_above_temp'] = $this->entry_model->get_many_by($ab_where);
+
+            //below temperature
+            $bl_where = ['temperature <' => 35] + $where;
+            $this->data['total_below_temp'] = $this->entry_model->get_many_by($bl_where);
+
+            //normal temperature
+            $nm_where = ['temperature >=' => 35, 'temperature < ' => 38] + $where;
+            $this->data['total_normal_temp'] = $this->entry_model->get_many_by($nm_where);
+
+            //point of entries
+            $poe = $this->poe_model->get_all();
+            foreach ($poe as $value) {
+                //json data creation
+                $poe_array[] = $value->name;
+
+                //passenger per poe
+                $s_where = ['point_of_entry' => $value->id] + $where;
+                $passengers = $this->entry_model->count_many_by($s_where);
+                $passengers_array[] = (int)$passengers;
+            }
+
+            //reported symptoms
+            $symptoms = $this->symptom_model->get_many_by(['id !=' => 1000]);
+
+            //entries
+            $entries = $this->entry_model->get_many_by($where);
+
+            foreach ($symptoms as $value) {
+                $symptoms_array[] = $value->name;
+
+                //select from poe
+                $i = 0;
+                foreach ($entries as $entry) {
+                    $st = explode(',', $entry->symptoms);
+
+                    if (in_array($value->id, $st))
+                        $i++;
+                }
+
+                //number of symptoms
+                $symptom_occurrences_array[] = (int)$i;
+            }
+        } else {
+            //total no of passenger
+            $this->data['total_passengers'] = $this->entry_model->count_all();
+
+            //male and female
+            $male = 0;
+            $female = 0;
+            $all_passengers = $this->entry_model->get_total_by_gender();
+            if ($all_passengers) {
+                if (isset($all_passengers[0]))
+                    $male = $all_passengers[0]->passengers;
+
+                if (isset($all_passengers[1]))
+                    $female = $all_passengers[1]->passengers;
+            }
+
+            $this->data['male'] = $male;
+            $this->data['female'] = $female;
+
+            //total_male_female
+            $this->data['total_male_female'] = $male + $female;
+
+            //above temperature
+            $this->data['total_above_temp'] = $this->entry_model->get_many_by(['temperature >=' => 38]);
+
+            //below temperature
+            $this->data['total_below_temp'] = $this->entry_model->get_many_by(['temperature <' => 35]);
+
+            //normal temperature
+            $this->data['total_normal_temp'] = $this->entry_model->get_many_by(['temperature >=' => 35, 'temperature < ' => 38]);
+
+            //point of entries
+            $poe = $this->poe_model->get_all();
+            foreach ($poe as $value) {
+                //json data creation
+                $poe_array[] = $value->name;
+
+                //passenger per poe
+                $passengers = $this->entry_model->count_many_by(['point_of_entry' => $value->id]);
+                $passengers_array[] = (int)$passengers;
+            }
+
+            //reported symptoms
+            $symptoms = $this->symptom_model->get_many_by(['id !=' => 1000]);
+
+            //entries
+            $entries = $this->entry_model->get_all();
+
+            foreach ($symptoms as $value) {
+                $symptoms_array[] = $value->name;
+
+                //select from poe
+                $i = 0;
+                foreach ($entries as $entry) {
+                    $st = explode(',', $entry->symptoms);
+
+                    if (in_array($value->id, $st))
+                        $i++;
+                }
+
+                //number of symptoms
+                $symptom_occurrences_array[] = (int)$i;
+            }
+        }
 
         //json data
         $this->data['poe_array'] = json_encode($poe_array);

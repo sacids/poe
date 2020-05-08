@@ -113,8 +113,11 @@ class Entry_model extends CI_Model
     }
 
     //get number of passenger by gender
-    function get_total_by_gender()
+    function get_total_by_gender($where = null)
     {
+        if ($where != null)
+            $this->db->where($where);
+
         $this->db->group_start()
             ->where('sex', 'Male')
             ->or_where('sex', 'Female')
@@ -122,6 +125,7 @@ class Entry_model extends CI_Model
 
         return $this->db
             ->select('sex, COUNT(id) AS passengers')
+            ->where(['temperature >=' => 38])
             ->group_by('sex')
             ->order_by('sex', 'DESC')
             ->get($this->table)->result();
