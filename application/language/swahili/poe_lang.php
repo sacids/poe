@@ -14,6 +14,7 @@ $lang['lbl_swahili'] = 'Swahili';
 $lang['united_republic'] = 'Jamhuri ya Muungano wa Tanzania';
 $lang['ministry_of_health'] = 'Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee na Watoto';
 $lang['port_health'] = 'Port Health';
+$lang['traveller_surveillance'] = 'Ufuatiliaji wa magonjwa';
 
 //traveller surveillance form
 $lang['traveller_surveillance_form'] = 'Fomu ya ufuatiliaji wa magonjwa kwa abiria';
@@ -101,7 +102,7 @@ $lang['lbl_employment'] = 'Kazi';
 $lang['lbl_select_employment'] = '--Chagua--';
 $lang['lbl_employment_government'] = 'Serikalini';
 $lang['lbl_employment_non_government'] = 'Taasisi Binafsi';
-$lang['lbl_employment_non_profit'] = 'Taasisi isiyo na faida';
+$lang['lbl_employment_non_profit'] = 'Asasi za kiraia';
 $lang['lbl_employment_studies'] = 'Mwanafunzi';
 $lang['lbl_employment_business'] = 'Biashara';
 $lang['lbl_employment_religious'] = 'Taasisi za Kidini';
@@ -149,11 +150,13 @@ $lang['lbl_write_no_of_days'] = 'Andika muda wa siku...';
 $lang['lbl_add_another'] = 'Ongeza';
 
 $lang['lbl_last_21_days_have_you'] = 'Toa jibu sahihi ikiwa ndani ya siku 21 (majuma 3) zilizopita, umewahi:';
-$lang['lbl_visited_case_due_to_ebola'] = 'Kutembelea/kuishi kwenye maeneo yenye mlipuko wa Ebola? ';
+$lang['lbl_visited_case_due_to_ebola'] = 'Kutembelea/kuishi kwenye maeneo(nchi) yenye mlipuko wa Ebola? ';
+$lang['lbl_visited_case_due_to_ebola_tz'] = 'Kutembelea/kuishi kwenye maeneo(wilaya) yenye mlipuko wa Ebola? ';
 $lang['lbl_participate_take_care_sick_person_ebola'] = 'Kuhusika katika kumwuguza mgonjwa aliyehisiwa/kudhibitishwa na Ebola?';
 $lang['lbl_participate_burial_of_dead_person_ebola'] = 'Kushiriki mazishi ya mtu aliyekufa na Ebola?';
 
-$lang['lbl_visited_case_due_to_corona'] = 'Kutembelea/kuishi kwenye maeneo yenye mlipuko wa Corona/COVID-19?';
+$lang['lbl_visited_case_due_to_corona'] = 'Kutembelea/kuishi kwenye maeneo(nchi) yenye mlipuko wa Corona/COVID-19?';
+$lang['lbl_visited_case_due_to_corona_tz'] = 'Kutembelea/kuishi kwenye maeneo (wilaya) yenye mlipuko wa Corona/COVID-19?';
 $lang['lbl_participate_take_care_sick_person_corona'] = 'Kuhusika katika kumwuguza mgonjwa aliyehisiwa/kudhibitishwa na Corona?';
 $lang['lbl_participate_burial_of_dead_person_corona'] = 'Kushiriki mazishi ya mtu aliyekufa na Corona?';
 $lang['required_option'] = 'Inahitajika';
