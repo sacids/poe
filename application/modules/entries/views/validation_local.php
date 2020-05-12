@@ -261,7 +261,7 @@
             }
 
             //check all data in tab one
-            if ((errorRegion || errorMobile || email) === true) {
+            if ((errorRegion || errorMobile || errorEmail) === true) {
                 return false;
             }
             return true;
