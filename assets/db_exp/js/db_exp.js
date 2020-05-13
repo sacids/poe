@@ -11,6 +11,7 @@ function initComponents(){
 
 function make_table(){
 
+
     $('.dbx_table').DataTable({
         autoWidth:      false,
         deferRender:    true,
@@ -107,7 +108,7 @@ function make_table(){
                 console.log("Loading Ajax dbx: " + textStatus + ", " + errorThrown);
             }
         }).always(function(){ 
-            $('#eip').modal('hide'); 
+            $('#eip').modal('hide');
         });
 
         // Avoid submit event to continue normal execution
@@ -115,6 +116,8 @@ function make_table(){
         return false;
 
     });
+
+
 
 
 }

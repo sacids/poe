@@ -45,6 +45,10 @@ class Screening extends MX_Controller{
         $this->domestic('international');
     }
 
+    public function screening(){
+        $this->domestic('screening');
+    }
+
     public function domestic($type = 'Local'){
 
         if($this->manage_tbl('entries')) return;
@@ -54,6 +58,20 @@ class Screening extends MX_Controller{
             $data['title']      = ucfirst(strtolower($type)).' Entries Management';
             $data['description']    = 'Review and update information pertaining to '.ucfirst(strtolower($type)).' travellers';
             $this->load->view('admin/common/title',$data);
+        }
+
+        $today  = date('Y-m-d');
+
+        switch($type){
+            case 'Local':
+                $this->db_exp->set_search_condition('form_type = "Domestic" and arrival_date = "'.$today.'"');
+                break;
+            case 'international':
+                $this->db_exp->set_search_condition('form_type = "International" and arrival_date = "'.$today.'"');
+                break;
+            case 'screening':
+                $this->db_exp->set_search_condition('score > 0 and arrival_date = "'.$today.'"');
+                break;
         }
 
         //$this->db_exp->set_search_condition('form_type = "'.$type.'"');
@@ -72,8 +90,8 @@ class Screening extends MX_Controller{
 
         //$this->db_exp->set_wrp_class('temperature','eip');
 
-        $this->db_exp->set_select('action_taken',array('0' => 'Go soemewhere','1' => 'Nothing'));
-        $this->db_exp->set_edit_in_place(array('temperature','action_taken'));
+        $this->db_exp->set_select('action_taken',array('1' => 'Allow to Proceed','2' => 'Secondary Screening'));
+        $this->db_exp->set_edit_in_place(array('temperature'));
         $this->db_exp->set_wrp_class('score','score');
         $this->db_exp->show_insert_button = false;
         $this->db_exp->set_default_action('row_list');

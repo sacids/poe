@@ -7,8 +7,21 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function checkScore(){
+
+    $("tr").filter(function() {
+        return parseInt($(this).children("td.score").text(), 10) > 0;
+    }).css("background-color","#33FF99");
+
+    $("tr").filter(function() {
+        return parseInt($(this).children("td.score").text(), 10) > 29;
+    }).css("background-color","#C00000");
+}
 
 $(document).ready(function(){
+
+
+    // check scores
 
     $(document).on('click','.item',function(event){
 

@@ -17,8 +17,6 @@
 
     <?php $this->load->view('common/js'); ?>
 
-    <!--highcharts -->
-    <script src="<?= base_url('assets/js/highcharts.js') ?>"></script>
 
 </head>
 <body>

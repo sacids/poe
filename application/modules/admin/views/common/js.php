@@ -6,3 +6,5 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
     <script src="<?php echo base_url('assets/db_exp/js/db_exp.js'); ?>" ></script>
     <script src="<?php echo base_url('assets/admin/js/admin.js'); ?>" ></script>
+    <!--highcharts -->
+    <script src="<?= base_url('assets/js/highcharts.js') ?>"></script>
