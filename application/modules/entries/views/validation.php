@@ -13,9 +13,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n === (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = 'Submit';
+            document.getElementById("nextBtn").innerHTML = <?= $this->lang->line('lbl_save') ?>;
         } else {
-            document.getElementById("nextBtn").innerHTML = 'Next';
+            document.getElementById("nextBtn").innerHTML = <?= $this->lang->line('lbl_next') ?>;
         }
         // ... and run a function that displays the correct step indicator:
         fixStepIndicator(n)
@@ -316,10 +316,6 @@
 
             return true;
         } else if (currentTab === 4) {
-            return true;
-        } else if (currentTab === 5) {
-            return true;
-        } else if (currentTab === 6) {
             let errorSymptoms = true;
 
             for (let i = 0; i < symptoms.length; i++) {

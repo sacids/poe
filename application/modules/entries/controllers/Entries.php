@@ -52,7 +52,7 @@ class Entries extends MX_Controller
                 'ID_number' => $this->input->post('passport_number'),
                 'transport_means' => $this->input->post('transport_means'),
                 'transport_name' => $this->input->post('transport_name'),
-                'arrival_date' => $this->input->post('arrival_date'),
+                'arrival_date' => date('Y-m-d', strtotime($this->input->post('arrival_date'))),
                 'point_of_entry' => $this->input->post('point_of_entry'),
                 'seat_no' => $this->input->post('seat_no'),
                 'visiting_purpose' => $this->input->post('visiting_purpose'),
@@ -67,12 +67,6 @@ class Entries extends MX_Controller
                 'mobile' => $this->input->post('mobile'),
                 'email' => $this->input->post('email'),
                 'location_origin' => $this->input->post('location_origin'),
-                'visit_area_ebola' => $this->input->post('visit_area_ebola'),
-                'taken_care_sick_person_ebola' => $this->input->post('taken_care_sick_person_ebola'),
-                'participated_burial_ebola' => $this->input->post('participated_burial_ebola'),
-                'visit_area_corona' => $this->input->post('visit_area_corona'),
-                'taken_care_sick_person_corona' => $this->input->post('taken_care_sick_person_corona'),
-                'participated_burial_corona' => $this->input->post('participated_burial_corona'),
                 'symptoms' => join(',', $symptoms),
                 'other_symptoms' => $this->input->post('other_symptoms'),
                 'created_at' => date('Y-m-d H:i:s')
@@ -102,7 +96,7 @@ class Entries extends MX_Controller
             } else {
                 $this->session->set_flashdata('message', display_message($this->lang->line('lbl_failed_msg'), 'danger'));
             }
-            redirect('entries/international', 'refresh');
+            redirect('entries/success/intl', 'refresh');
         }
 
         //populate data
@@ -122,6 +116,19 @@ class Entries extends MX_Controller
         //render view
         $this->load->view('header', $this->data);
         $this->load->view('international');
+        $this->load->view('footer');
+    }
+
+    //success
+    function success($form_type)
+    {
+        $this->data['title'] = 'Success';
+
+        $this->data['form_type'] = $form_type;
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view('success');
         $this->load->view('footer');
     }
 
@@ -151,7 +158,7 @@ class Entries extends MX_Controller
                 'ID_number' => $this->input->post('identification_number'),
                 'transport_means' => $this->input->post('transport_means'),
                 'transport_name' => $this->input->post('transport_name'),
-                'arrival_date' => $this->input->post('arrival_date'),
+                'arrival_date' => date('Y-m-d', strtotime($this->input->post('arrival_date'))),
                 'point_of_entry' => $this->input->post('point_of_entry'),
                 'seat_no' => $this->input->post('seat_no'),
                 'visiting_purpose' => $this->input->post('visiting_purpose'),
@@ -386,13 +393,12 @@ class Entries extends MX_Controller
     //calculate sum score of threshold
     function symptoms_score($symptoms)
     {
-        $sum = 0;
-        $query = $this->db->select('SUM(score) as score')->where_in('id', $symptoms)->get('symptoms')->result();
-        log_message("DEBUG", "query => " . $this->db->last_query());
+        $symptoms = explode(',', $symptoms);
 
-        foreach ($query as $value) {
-            if ($value->score != null)
-                $sum = $value->score;
+        $sum = 0;
+        foreach ($symptoms as $val) {
+            $symptom = $this->db->select('score')->get_where('symptoms', ['id' => $val])->row();
+            $sum += $symptom->score;
         }
         log_message("DEBUG", "score => " . $sum);
         return $sum;

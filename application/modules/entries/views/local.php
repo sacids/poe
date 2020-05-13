@@ -435,7 +435,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_visited_case_due_to_ebola') ?></label><br/>
+                                                <label><?= $this->lang->line('lbl_visited_case_due_to_ebola_tz') ?></label><br/>
                                                 <?php
                                                 echo form_radio('visit_area_ebola', 'Yes', NULL, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'Yes'));
                                                 echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
@@ -485,7 +485,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_visited_case_due_to_corona') ?></label><br/>
+                                                <label><?= $this->lang->line('lbl_visited_case_due_to_corona_tz') ?></label><br/>
                                                 <?php
                                                 echo form_radio('visit_area_corona', 'Yes', NULL, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'Yes'));
                                                 echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';

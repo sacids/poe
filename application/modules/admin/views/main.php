@@ -4,17 +4,17 @@
             <div class="pull-right">
                 <?= form_open(uri_string(), 'method="POST"'); ?>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <?php
-                            $_option = ['' => '-- Select --', 'today' => 'Today', 'yesterday' => 'Yesterday', 'week' => 'Last week', 'month' => 'Last month', 'overall' => 'Overall'];
-                            echo form_dropdown('days', $_option, set_value('days'), 'class="form-control"'); ?>
+                            $_option = ['' => '-- Select --', 'today' => 'Today', 'yesterday' => 'Yesterday', 'last_week' => 'Last week', 'last_month' => 'Last month', 'overall' => 'Overall'];
+                            echo form_dropdown('day', $_option, set_value('day'), 'class="form-contrl"'); ?>
                         </div> <!-- /form-group -->
                     </div><!--./col-lg-4 -->
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <div class="form-group">
-                            <button type="submit" name="filter" class="btn btn-secondary">
+                            <button type="submit" name="filter" class="btn-secondary ">
                                 <i class="fa fa-search"></i> Filter
                             </button>
                         </div> <!-- /form-group -->
@@ -48,20 +48,15 @@
         </div><!--./col-md-3 -->
 
         <div class="col-lg-3 col-md-3">
-            <div class="card bg-secondary-200">
+            <div class="card bg-success">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 col-xs-3">
-                            <i class="fa fa-couple-users"></i>
+                            <i class="fa fa-normal-temp"></i>
                         </div>
                         <div class="col-md-9 col-xs-9 text-right">
-                            <div class="text-medium">
-                                Male: <?= calc_percentage($male, $total_passengers) ?>%
-                            </div>
-                            <br/>
-                            <div class="text-medium">
-                                Female: <?= calc_percentage($female, $total_passengers) ?>%
-                            </div>
+                            <div class="text-medium">Normal Temp</div>
+                            <div class="text-large"><?= number_format(count($total_normal_temp)) ?></div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +71,7 @@
                             <i class="fa fa-above-temp"></i>
                         </div>
                         <div class="col-md-9 col-xs-9 text-right">
-                            <div class="text-medium">Above Temp</div>
+                            <div class="text-medium">Above Normal Temp</div>
                             <div class="text-large"><?= number_format(count($total_above_temp)) ?></div>
                         </div>
                     </div>
@@ -85,15 +80,21 @@
         </div><!--./col-md-3 -->
 
         <div class="col-lg-3 col-md-3">
-            <div class="card bg-success">
+            <div class="card bg-danger-100">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 col-xs-3">
-                            <i class="fa fa-normal-temp"></i>
+                            <i class="fa fa-couple-users"></i>
                         </div>
                         <div class="col-md-9 col-xs-9 text-right">
-                            <div class="text-medium">Normal Temp</div>
-                            <div class="text-large"><?= number_format(count($total_normal_temp)) ?></div>
+                            <div class="text-medium">Above Normal Temp</div>
+
+                            <div class="text-small">
+                                Male: <?= calc_percentage($male, $total_male_female) ?>%
+                            </div>
+                            <div class="text-small">
+                                Female: <?= calc_percentage($female, $total_male_female) ?>%
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,24 +122,28 @@
 
                 <div class="card-body">
                     <div class="info" style="height: 350px; width: 100%;">
-                        <p>Number of Flight
-                            <span>5</span>
-                        </p>
-
                         <p>International Passengers
-                            <span>200</span>
+                            <span><?= $international ?></span>
                         </p>
 
                         <p>Domestic Passengers
-                            <span>100</span>
+                            <span><?= $domestic ?></span>
+                        </p>
+
+                        <p>Above Normal Temp
+                            <span><?= number_format(count($total_above_temp)) ?></span>
+                        </p>
+
+                        <p>Below Normal Temp
+                            <span><?= number_format(count($total_below_temp)) ?></span>
                         </p>
 
                         <p>Going to secondary screening
-                            <span>240</span>
+                            <span><?= $secondary_screening ?></span>
                         </p>
 
                         <p>Allowed to Proceed
-                            <span>255</span>
+                            <span><?= $allowed_proceed ?></span>
                         </p>
                     </div><!--stats -->
                 </div>

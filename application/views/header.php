@@ -43,7 +43,7 @@
 <!-- Fixed navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?= site_url('') ?>">Port Health</a>
+        <a class="navbar-brand" href="<?= site_url('') ?>"><?= $this->lang->line("traveller_surveillance") ?></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->

@@ -14,6 +14,7 @@ $lang['lbl_swahili'] = 'Swahili';
 $lang['united_republic'] = 'The United Republic of Tanzania';
 $lang['ministry_of_health'] = 'Ministry of Health, Community Development, Gender, Elderly and Children';
 $lang['port_health'] = 'Port Health';
+$lang['traveller_surveillance'] = 'Travellers Surveillance';
 
 //traveller surveillance form
 $lang['traveller_surveillance_form'] = 'Traveller Surveillance Form';
@@ -97,7 +98,7 @@ $lang['lbl_duration_of_stay'] = 'Duration of stay (days)';
 $lang['lbl_write_duration_of_stay'] = 'Write duration of stay...';
 $lang['require_duration_of_stay'] = 'Duration of stay is required';
 $lang['invalid_duration_of_stay'] = 'Duration of stay should be greater than 0';
-$lang['lbl_employment'] = 'Employment/Work';
+$lang['lbl_employment'] = 'Employment/Occupation';
 $lang['lbl_select_employment'] = '-- Select --';
 $lang['lbl_employment_government'] = 'Government';
 $lang['lbl_employment_non_government'] = 'Non-Government';
@@ -105,8 +106,8 @@ $lang['lbl_employment_non_profit'] = 'Non-Profit';
 $lang['lbl_employment_studies'] = 'Student';
 $lang['lbl_employment_business'] = 'Business';
 $lang['lbl_employment_religious'] = 'Religious';
-$lang['required_employment'] = 'Employment/Work is required';
-$lang['lbl_other_employment'] = 'Other Employment/Work (specify)';
+$lang['required_employment'] = 'Employment/Occupation is required';
+$lang['lbl_other_employment'] = 'Other Employment/Occupation (specify)';
 
 $lang['lbl_contact_while_in_tanzania'] = 'Contact while in Tanzania';
 $lang['lbl_contacts'] = 'Contacts';
@@ -149,10 +150,13 @@ $lang['invalid_no_of_days'] = 'No. of Days should not be greater than 21';
 $lang['lbl_write_no_of_days'] = 'Write Number of Days...';
 $lang['lbl_add_another'] = 'Add Another';
 $lang['lbl_last_21_days_have_you'] = 'In the last 21 days (3 weeks) have you';
-$lang['lbl_visited_case_due_to_ebola'] = 'Visited/Resided in an area with cases/deaths due to Ebola?';
+$lang['lbl_visited_case_due_to_ebola'] = 'Visited/Resided in an area (countries)  with cases/deaths due to Ebola?';
+$lang['lbl_visited_case_due_to_ebola_tz'] = 'Visited/Resided in an area (districts) with cases/deaths due to Ebola?';
 $lang['lbl_participate_take_care_sick_person_ebola'] = 'Participated in taking care of the person suspected/confirmed of Ebola?';
 $lang['lbl_participate_burial_of_dead_person_ebola'] = 'Participated in the burial of dead person of Ebola?';
-$lang['lbl_visited_case_due_to_corona'] = 'Visited/Resided in an area with cases/deaths due to Corona/COVID-19?';
+
+$lang['lbl_visited_case_due_to_corona'] = 'Visited/Resided in an area (countries) with cases/deaths due to Corona/COVID-19?';
+$lang['lbl_visited_case_due_to_corona_tz'] = 'Visited/Resided in an area (districts) with cases/deaths due to Corona/COVID-19?';
 $lang['lbl_participate_take_care_sick_person_corona'] = 'Participated in taking care of the person suspected/confirmed of Corona/COVID-19?';
 $lang['lbl_participate_burial_of_dead_person_corona'] = 'Participated in the burial of dead person of Corona/COVID-19?';
 
@@ -173,7 +177,7 @@ $lang['lbl_joint_pain'] = 'Joint/Muscle pain';
 $lang['lbl_diarrhea'] = 'Diarrhea';
 $lang['lbl_body_weakness'] = 'Body weakness';
 $lang['lbl_unusual_bleeding'] = 'Unusual bleeding';
-$lang['lbl_flu'] = 'Flu like symptoms';
+$lang['lbl_flu'] = 'Flu';
 $lang['lbl_difficulty_swallowing'] = 'Difficulty in swallowing';
 $lang['lbl_chills'] = 'Chills';
 $lang['lbl_paralysis'] = 'Paralysis';

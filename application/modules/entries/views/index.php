@@ -35,23 +35,30 @@
                         <div class="col-lg-12 text-center">
                             <div class="mt-4"></div>
                             <div class="dropdown">
-                                <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle" type="button"
+                                <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
+                                        type="button"
                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     <?= $this->lang->line("lbl_language") ?>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item"
-                                       href="<?= site_url('languageChanger/switchLang/english') ?>"><?= $this->lang->line("lbl_english") ?></a>
+                                       href="<?= site_url('languageChanger/switchLang/english') ?>"><img width="32"
+                                                src="<?= base_url('assets/img/usa_flag.png') ?>"/> <?= $this->lang->line("lbl_english") ?>
+                                    </a>
                                     <a class="dropdown-item"
-                                       href="<?= site_url('languageChanger/switchLang/swahili') ?>"><?= $this->lang->line("lbl_swahili") ?></a>
+                                       href="<?= site_url('languageChanger/switchLang/swahili') ?>"><img width="32"
+                                                src="<?= base_url('assets/img/tz_flag.png') ?>"/> <?= $this->lang->line("lbl_swahili") ?>
+                                    </a>
                                 </div>
                             </div><!--./dropdown -->
                             <div class="mt-4"></div>
 
-                            <a style="width: 200px;" href="<?= site_url('entries/international') ?>" class="btn btn-primary btn-sm"><?= $this->lang->line("lbl_international") ?></a>
+                            <a style="width: 200px;" href="<?= site_url('entries/international') ?>"
+                               class="btn btn-primary btn-sm"><?= $this->lang->line("lbl_international") ?></a>
                             <div class="mt-4"></div>
-                            <a style="width: 200px;" href="<?= site_url('entries/local') ?>" class="btn btn-secondary btn-sm"><?= $this->lang->line("lbl_local") ?></a>
+                            <a style="width: 200px;" href="<?= site_url('entries/local') ?>"
+                               class="btn btn-secondary btn-sm"><?= $this->lang->line("lbl_local") ?></a>
 
                         </div><!--./col-lg-12-->
                     </div><!--./row -->

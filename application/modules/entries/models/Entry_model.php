@@ -58,6 +58,22 @@ class Entry_model extends CI_Model
         return $this->db->get_where($this->table, $where)->num_rows();
     }
 
+    //count many
+    function count_many_by_type($type, $where)
+    {
+        return $this->db
+            ->where('form_type' , $type)
+            ->get_where($this->table, $where)->num_rows();
+    }
+
+    //count many
+    function count_many_by_action_taken($action, $where)
+    {
+        return $this->db
+            ->where('action_taken' , $action)
+            ->get_where($this->table, $where)->num_rows();
+    }
+
     //order by
     function order_by($field, $condition)
     {
@@ -113,8 +129,11 @@ class Entry_model extends CI_Model
     }
 
     //get number of passenger by gender
-    function get_total_by_gender()
+    function get_total_by_gender($where = null)
     {
+        if ($where != null)
+            $this->db->where($where);
+
         $this->db->group_start()
             ->where('sex', 'Male')
             ->or_where('sex', 'Female')
@@ -122,6 +141,7 @@ class Entry_model extends CI_Model
 
         return $this->db
             ->select('sex, COUNT(id) AS passengers')
+            ->where(['temperature >=' => 38])
             ->group_by('sex')
             ->order_by('sex', 'DESC')
             ->get($this->table)->result();

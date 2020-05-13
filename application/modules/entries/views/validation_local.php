@@ -13,9 +13,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n === (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = 'Submit';
+            document.getElementById("nextBtn").innerHTML = <?= $this->lang->line('lbl_save') ?>;
         } else {
-            document.getElementById("nextBtn").innerHTML = 'Next';
+            document.getElementById("nextBtn").innerHTML = <?= $this->lang->line('lbl_next') ?>;
         }
         // ... and run a function that displays the correct step indicator:
         fixStepIndicator(n)
@@ -226,7 +226,7 @@
 
             //tab 3 validation
         } else if (currentTab === 2) {
-            let errorRegion = errorMobile = true;
+            let errorRegion = errorMobile = errorEmail = true;
 
             //validate region
             if (region === "") {
@@ -249,8 +249,19 @@
                 }
             }
 
+            //validate email
+            if (email !== "") {
+                let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (regex.test(email) === false) {
+                    printError("errorEmail", "<?php echo $this->lang->line('invalid_email');?>");
+                } else {
+                    printError("errorEmail", "");
+                    errorEmail = false;
+                }
+            }
+
             //check all data in tab one
-            if ((errorRegion || errorMobile) === true) {
+            if ((errorRegion || errorMobile || errorEmail) === true) {
                 return false;
             }
             return true;
