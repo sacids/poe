@@ -7,7 +7,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <?php
-                            $_option = ['' => '-- Select --', 'today' => 'Today', 'yesterday' => 'Yesterday', 'week' => 'Last week', 'month' => 'Last month', 'overall' => 'Overall'];
+                            $_option = ['' => '-- Select --', 'today' => 'Today', 'yesterday' => 'Yesterday', 'last_week' => 'Last week', 'last_month' => 'Last month', 'overall' => 'Overall'];
                             echo form_dropdown('day', $_option, set_value('day'), 'class="form-contrl"'); ?>
                         </div> <!-- /form-group -->
                     </div><!--./col-lg-4 -->
@@ -123,11 +123,11 @@
                 <div class="card-body">
                     <div class="info" style="height: 350px; width: 100%;">
                         <p>International Passengers
-                            <span>200</span>
+                            <span><?= $international ?></span>
                         </p>
 
                         <p>Domestic Passengers
-                            <span>100</span>
+                            <span><?= $domestic ?></span>
                         </p>
 
                         <p>Above Normal Temp
@@ -139,11 +139,11 @@
                         </p>
 
                         <p>Going to secondary screening
-                            <span>240</span>
+                            <span><?= $secondary_screening ?></span>
                         </p>
 
                         <p>Allowed to Proceed
-                            <span>255</span>
+                            <span><?= $allowed_proceed ?></span>
                         </p>
                     </div><!--stats -->
                 </div>
