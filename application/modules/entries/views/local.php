@@ -541,7 +541,7 @@
                                                 if (isset($symptoms) && $symptoms) {
                                                     foreach ($symptoms as $symptom) { ?>
                                                         <input type="checkbox" name="symptoms[]"
-                                                               id="symptoms"
+                                                               id="<?= $symptom->id; ?>"
                                                                value="<?= $symptom->id; ?>" <?= set_checkbox('symptoms[]', $symptom->id); ?>>&nbsp;
                                                         <label for="<?= $symptom->id; ?>"><?= $this->lang->line('lbl_' . $symptom->alias); ?></label>
                                                         <br/>
