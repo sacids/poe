@@ -84,7 +84,7 @@ class Screening extends MX_Controller{
                 'participated_burial_ebola','visit_area_corona',
                 'taken_care_sick_person_corona','participated_burial_corona',
                 'symptoms','other_symptoms','updated_at','updated_by','nationality',
-                'street','mobile','email','location_origin'
+                'street','mobile','email','location_origin','action_taken'
             )
         );
 

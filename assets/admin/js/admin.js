@@ -11,11 +11,11 @@ function checkScore(){
 
     $("tr").filter(function() {
         return parseInt($(this).children("td.score").text(), 10) > 0;
-    }).css("background-color","#33FF99");
+    }).css("background-color","#00CCFF");
 
     $("tr").filter(function() {
         return parseInt($(this).children("td.score").text(), 10) > 29;
-    }).css("background-color","#C00000");
+    }).css("background-color","#FF3300");
 }
 
 $(document).ready(function(){
