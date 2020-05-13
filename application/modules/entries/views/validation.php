@@ -316,10 +316,6 @@
 
             return true;
         } else if (currentTab === 4) {
-            return true;
-        } else if (currentTab === 5) {
-            return true;
-        } else if (currentTab === 6) {
             let errorSymptoms = true;
 
             for (let i = 0; i < symptoms.length; i++) {

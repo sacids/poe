@@ -45,8 +45,6 @@
                                 <span class="step"></span>
                                 <span class="step"></span>
                                 <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
                             </div>
 
                             <!-- form -->
@@ -410,106 +408,6 @@
                                 </div><!--./tab -->
 
                                 <div class="tab" id="tab5">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title"><?= $this->lang->line('lbl_last_21_days_have_you') ?></h6>
-                                        </div><!--./col-lg-6 -->
-                                    </div><!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_visited_case_due_to_ebola') ?></label><br/>
-                                                <?php
-                                                echo form_radio('visit_area_ebola', 'Yes', NULL, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('visit_area_ebola', 'No', TRUE, 'id="visit_area_ebola" ' . set_radio('visit_area_ebola', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label>';
-                                                ?>
-                                                <span id="errorVisitedAreaEbola" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_participate_take_care_sick_person_ebola') ?></label><br/>
-                                                <?php
-                                                echo form_radio('taken_care_sick_person_ebola', 'Yes', NULL, 'id="taken_care_sick_person_ebola" ' . set_radio('taken_care_sick_person_ebola', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('taken_care_sick_person_ebola', 'No', TRUE, 'id="taken_care_sick_person_ebola" ' . set_radio('taken_care_sick_person_ebola', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
-                                                <span id="errorTakeCareSickPersonEbola" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_participate_burial_of_dead_person_ebola') ?></label><br/>
-                                                <?php
-                                                echo form_radio('participated_burial_ebola', 'Yes', NULL, 'id="participated_burial_ebola" ' . set_radio('participated_burial_ebola', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('participated_burial_ebola', 'No', TRUE, 'id="participated_burial_ebola" ' . set_radio('participated_burial_ebola', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
-                                                <span id="errorParticipateBurialEbola" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-                                    </div><!--./row -->
-                                </div><!--./tab -->
-
-                                <div class="tab" id="tab6">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title"><?= $this->lang->line('lbl_last_21_days_have_you') ?></h6>
-                                        </div><!--./col-lg-6 -->
-                                    </div><!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_visited_case_due_to_corona') ?></label><br/>
-                                                <?php
-                                                echo form_radio('visit_area_corona', 'Yes', NULL, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('visit_area_corona', 'No', true, 'id="visit_area_corona" ' . set_radio('visit_area_corona', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label>';
-                                                ?>
-                                                <span id="errorVisitedAreaCorona" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_participate_take_care_sick_person_corona') ?></label><br/>
-                                                <?php
-                                                echo form_radio('taken_care_sick_person_corona', 'Yes', NULL, 'id="taken_care_sick_person_corona" ' . set_radio('taken_care_sick_person_corona', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('taken_care_sick_person_corona', 'No', true, 'id="taken_care_sick_person_corona" ' . set_radio('taken_care_sick_person_corona', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
-                                                <span id="errorTakeCareSickPersonCorona" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label><?= $this->lang->line('lbl_participate_burial_of_dead_person_corona') ?></label><br/>
-                                                <?php
-                                                echo form_radio('participated_burial_corona', 'Yes', NULL, 'id="participated_burial_corona" ' . set_radio('participated_burial_corona', 'Yes'));
-                                                echo '<label>' . $this->lang->line('lbl_yes') . '</label> &nbsp;&nbsp;&nbsp;';
-
-                                                echo form_radio('participated_burial_corona', 'No', true, 'id="participated_burial_corona" ' . set_radio('participated_burial_corona', 'No'));
-                                                echo '<label>' . $this->lang->line('lbl_no') . '</label> &nbsp;&nbsp;&nbsp;'; ?>
-                                                <span id="errorParticipateBurialCorona" style="color: red;"></span>
-                                            </div><!--./form-group -->
-                                        </div><!--./col-lg-12 -->
-                                    </div><!--./row -->
-                                </div><!--./tab -->
-
-                                <div class="tab" id="tab7">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <h6 class="title"><?= $this->lang->line('lbl_experienced_following_conditions') ?></h6>
