@@ -34,13 +34,13 @@ class Admin extends MX_Controller
 
             $where = [];
             if ($day == 'today')
-                $where = ['DATE(created_at)' => date('Y-m-d')];
+                $where = ['DATE(arrival_date)' => date('Y-m-d')];
             else if ($day == 'yesterday')
-                $where = ['DATE(created_at)' => date('Y-m-d', strtotime('-1 day'))];
+                $where = ['DATE(arrival_date)' => date('Y-m-d', strtotime('-1 day'))];
             else if ($day == 'last_week')
                 $where = []; //todo
             else if ($day == 'last_month')
-                $where = ['MONTH(created_at)' => date('m', strtotime('-1 month')), 'YEAR(created_at)' => date('Y')];
+                $where = ['MONTH(arrival_date)' => date('m', strtotime('-1 month')), 'YEAR(arrival_date)' => date('Y')];
             else if ($day == 'overall')
                 $where = [];
 
@@ -244,13 +244,13 @@ class Admin extends MX_Controller
 
             $where = [];
             if ($day == 'today')
-                $where = ['DATE(created_at)' => date('Y-m-d')];
+                $where = ['DATE(arrival_date)' => date('Y-m-d')];
             else if ($day == 'yesterday')
-                $where = ['DATE(created_at)' => date('Y-m-d', strtotime('-1 day'))];
+                $where = ['DATE(arrival_date)' => date('Y-m-d', strtotime('-1 day'))];
             else if ($day == 'last_week')
                 $where = []; //todo
             else if ($day == 'last_month')
-                $where = ['MONTH(created_at)' => date('m', strtotime('-1 month')), 'YEAR(created_at)' => date('Y')];
+                $where = ['MONTH(arrival_date)' => date('m', strtotime('-1 month')), 'YEAR(arrival_date)' => date('Y')];
             else if ($day == 'overall')
                 $where = [];
 
